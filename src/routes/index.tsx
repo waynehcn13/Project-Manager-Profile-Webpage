@@ -86,6 +86,23 @@ const projects = [
 
 const awards = [
   {
+    title: "Employee of the Year",
+    organization: "First American Mortgage Solutions — First American Title",
+    year: "Mar 2011",
+    description:
+      "Recognized for dedication to exceptional customer service, strong work ethic, attention to detail, and consistently going above and beyond for clients and colleagues. This award reflects the high standards of excellence and core values of First American Title, the nation's leading title insurance provider.",
+  },
+  {
+    title: "Award of Excellence",
+    organization: "First American Mortgage Solutions — First American Title",
+    year: "Sep 2016",
+  },
+  {
+    title: "Award of Excellence",
+    organization: "First American Mortgage Solutions — First American Title",
+    year: "Sep 2013",
+  },
+  {
     title: "Lean Six Sigma Black Belt (LSSBB)",
     organization: "Aveta Business Institute (SSO-CSSC)",
     year: "2025",
