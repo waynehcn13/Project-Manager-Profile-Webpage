@@ -329,14 +329,21 @@ function Index() {
           <ul className="mt-8 space-y-4">
             {awards.map((award) => (
               <li
-                key={award.title}
-                className="flex flex-col justify-between gap-1 rounded-lg border border-border bg-muted/30 px-5 py-4 sm:flex-row sm:items-center"
+                key={`${award.title}-${award.year}`}
+                className="rounded-lg border border-border bg-muted/30 px-5 py-4"
               >
-                <div>
-                  <p className="font-medium text-foreground">{award.title}</p>
-                  <p className="text-sm text-muted-foreground">{award.organization}</p>
+                <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-start">
+                  <div>
+                    <p className="font-medium text-foreground">{award.title}</p>
+                    <p className="text-sm text-muted-foreground">{award.organization}</p>
+                  </div>
+                  <span className="shrink-0 text-sm font-medium text-muted-foreground">{award.year}</span>
                 </div>
-                <span className="text-sm font-medium text-muted-foreground">{award.year}</span>
+                {award.description && (
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {award.description}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
