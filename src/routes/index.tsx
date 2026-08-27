@@ -15,6 +15,9 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const EMAIL = "waynehcn@gmail.com";
+const LINKEDIN = "https://linkedin.com/in/wayne-nguyen1";
+
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
@@ -24,87 +27,178 @@ const navLinks = [
 ];
 
 const skills = [
-  "Agile & Scrum",
-  "Stakeholder Management",
-  "Risk & Issue Management",
+  "Project Management",
+  "Agile Methodology",
+  "Waterfall Methodology",
+  "Lean Six Sigma",
+  "Risk Management",
+  "Stakeholder Engagement",
+  "Team Development",
+  "Logistics",
   "Jira & Confluence",
-  "Budget Planning",
-  "Cross-functional Leadership",
-  "Process Optimization",
-  "Vendor Management",
+  "Asana",
+  "MS Project",
+  "Azure DevOps",
+  "Slack",
+  "Microsoft Office Suite",
+  "SQL / MySQL",
+  "AI Tools (ChatGPT, Claude, Perplexity)",
 ];
 
 const projects = [
   {
-    title: "Enterprise CRM Migration",
+    title: "Third-Party API & EDI Integrations",
     description:
-      "Led a 12-month CRM migration for a 500-person sales organization, coordinating engineering, sales, and external vendors.",
-    outcome: "Delivered 2 weeks early and 8% under budget.",
+      "Led 10+ inbound and outbound API and EDI connector initiatives as the primary liaison between customers, technical teams, and vendors — from intake through go-live.",
+    outcome: "Improved processing efficiency by 1+ business day per initiative.",
   },
   {
-    title: "Mobile App Launch",
+    title: "ERP Legacy Data Migration",
     description:
-      "Managed end-to-end delivery of a customer-facing iOS and Android app, from discovery through store release.",
-    outcome: "Achieved 4.7-star rating and 100K downloads in 90 days.",
+      "Managed two internal ERP legacy system migration and enhancement initiatives, migrating business reporting, data, and image files while reconstructing system functionality.",
+    outcome: "Client satisfaction +10%, system efficiency +15%.",
   },
   {
-    title: "Operational Efficiency Program",
+    title: "Enterprise Title Insurance Program",
     description:
-      "Drove a company-wide process improvement initiative spanning operations, support, and finance teams.",
-    outcome: "Reduced cycle time by 25% and saved $400K annually.",
+      "Spearheaded 3 enterprise title insurance initiatives delivering a 50-state solution and expanding underwriting presence nationwide.",
+    outcome: "Production cost -15%, closings +20%.",
+  },
+  {
+    title: "Workflow Automation & Data Mapping",
+    description:
+      "Initiated 100+ workflow, automation, and data mapping initiatives using flow diagrams, fishbone analysis, Pareto charts, and process mapping.",
+    outcome: "Reduced production time by 2 business days.",
+  },
+  {
+    title: "Business Reporting & Analytics",
+    description:
+      "Led 30+ business system reporting initiatives, leveraging metrics to surface bottlenecks and drive continuous improvement.",
+    outcome: "15+ bottlenecks identified, efficiency +15%.",
+  },
+  {
+    title: "Portfolio Delivery — 100+ Projects",
+    description:
+      "Launched 100+ projects from initiation to closure with rigorous planning, budget control, and execution discipline.",
+    outcome: "$5M additional revenue, costs -30%, production efficiency +20%.",
   },
 ];
 
 const awards = [
   {
-    title: "Project Management Professional (PMP)",
-    organization: "Project Management Institute",
-    year: "2021",
+    title: "Lean Six Sigma Black Belt (LSSBB)",
+    organization: "Aveta Business Institute (SSO-CSSC)",
+    year: "2025",
   },
   {
-    title: "Top 10 PMs to Watch",
-    organization: "ProductCraft Quarterly",
+    title: "RAID LOG Practitioner",
+    organization: "RAIDLOG",
+    year: "2025",
+  },
+  {
+    title: "Project Management Professional (PMP) — ID 3783522",
+    organization: "Project Management Institute (PMI)",
+    year: "2024",
+  },
+  {
+    title: "Certified ScrumMaster (CSM) — ID 1490153",
+    organization: "Scrum Alliance",
     year: "2023",
   },
   {
-    title: "Excellence in Operational Leadership",
-    organization: "Internal Leadership Awards",
-    year: "2024",
+    title: "Finance Project Manager, Budget & Forecasting (Volunteer)",
+    organization: "PMI — Orange County Chapter",
+    year: "2024 — 2025",
+  },
+  {
+    title: "MBA, Data Analytics (In Progress)",
+    organization: "Louisiana State University Shreveport",
+    year: "Expected 2027",
+  },
+  {
+    title: "Bachelor of Arts, Sociology",
+    organization: "University of California, Irvine",
+    year: "2025",
+  },
+  {
+    title: "Certification in Project Management",
+    organization: "UC Irvine, Continuing Education",
+    year: "2020",
   },
 ];
 
 const experiences = [
   {
-    role: "Senior Project Manager",
-    company: "Apex Solutions",
-    period: "2022 — Present",
+    role: "Supervisor",
+    company: "United Parcel Service (UPS) — Anaheim, CA",
+    period: "Jul 2024 — Present",
     highlights: [
-      "Own portfolio of 5+ concurrent enterprise initiatives with combined budgets over $3M.",
-      "Built standardized Agile ceremonies adopted across three product squads.",
-      "Improved forecast accuracy by 30% through refined capacity planning.",
+      "Oversee inventory management for a 150,000 sq. ft. facility with 95% scanning accuracy across 25,000+ daily packages and a miss-load rate below 0.3%.",
+      "Manage resources and workload for a team of 10, achieving 97% on-time delivery and holding labor cost 12% under budget.",
+      "Implemented QA/QC processes that cut mis-sorts by 35% and hold 99% accuracy on air priority manifest validation across 800+ daily packages.",
+      "Lead daily stand-ups and weekly retrospectives with 98% attendance, driving 5+ process improvements that increased sorting speed by 10%.",
+      "Training program delivers a 92% first-time certification pass rate and cut onboarding from 3 weeks to 2.",
+      "Safety leadership: 100+ consecutive days without a lost-time incident and 95% monthly audit compliance.",
     ],
   },
   {
     role: "Project Manager",
-    company: "Northbridge Tech",
-    period: "2019 — 2022",
+    company: "First American Mortgage Solutions — Santa Ana, CA",
+    period: "Apr 2017 — Sept 2023",
     highlights: [
-      "Delivered 8 software releases for a B2B SaaS platform serving 2M+ users.",
-      "Reduced sprint spillover from 35% to under 10% within two quarters.",
-      "Facilitated workshops that aligned stakeholders across five time zones.",
+      "Launched 100+ projects from initiation to closure, generating $5M in additional revenue, +20% production efficiency, and -30% operational costs.",
+      "Led 10+ third-party API and EDI integration initiatives and two ERP legacy data migrations.",
+      "Directed financial planning, forecasting, and variance reviews for 800+ monthly title policies ($800K–$1M budget), saving 10%.",
+      "Managed 50+ stakeholders on a single project and led 500+ project meetings, improving transparency by 15%.",
+      "Owned UAT execution with checklists and requirement traceability matrices, achieving 95%+ user satisfaction at release.",
+      "Built risk registers, responses, and contingency plans that reduced project risk by 10%.",
     ],
   },
   {
-    role: "Associate Project Coordinator",
-    company: "BrightPath Consulting",
-    period: "2016 — 2019",
+    role: "Client Relations Manager",
+    company: "First American Mortgage Solutions — Santa Ana, CA",
+    period: "Apr 2017 — Sept 2023",
     highlights: [
-      "Supported delivery of client implementations ranging from $200K to $1M.",
-      "Maintained project documentation and risk registers for leadership reviews.",
-      "Recognized for streamlining reporting workflows and improving visibility.",
+      "Led and groomed a self-organized team of 7, delivering 100+ completed special projects.",
+      "Facilitated 200+ weekly vendor management meetings with root cause analysis and remediation, lifting vendor quality performance by 36%.",
+      "Led 100+ client change management initiatives with 98% documented, impact-analyzed, and approved change requests.",
+      "Reviewed 500+ title insurance files monthly and served 45+ direct lenders at a 95% satisfaction rating.",
+      "Performed 50+ monthly statistical samples and internal audits, driving 15% process improvement.",
+    ],
+  },
+  {
+    role: "Customer Service Supervisor | Operations Supervisor",
+    company: "First American Mortgage Solutions — Santa Ana, CA",
+    period: "Mar 2015 — Apr 2017",
+    highlights: [
+      "Led a team of 5 and redesigned workflows that cut client response time from 5 days to 2.",
+      "Improved 16+ production processes and authored 30+ procedures for onshore and offshore teams, reducing user errors by 15%.",
+      "Supported 13+ technology improvement projects with IT and Operations, raising project visibility by 10%.",
+      "Participated in 20+ quality audits and helped the organization obtain two ISO certifications.",
+    ],
+  },
+  {
+    role: "Senior CSR | Account Manager",
+    company: "First American Mortgage Solutions — Santa Ana, CA",
+    period: "Nov 2009 — Mar 2015",
+    highlights: [
+      "Led a team of 4 and increased customer satisfaction by 15% through coaching and service standards.",
+      "Resolved 100+ escalated customer issues and used trend analysis to reduce reported issues by 20%.",
+      "Governed 20+ special projects and submitted 50+ technology tickets for workflow improvements.",
+    ],
+  },
+  {
+    role: "Operations Manager | Mortgage Loan Officer",
+    company: "American First Financial Corporation — Los Angeles, CA",
+    period: "Feb 2005 — Mar 2008",
+    highlights: [
+      "Oversaw loan processing, underwriting, and closing for 50+ loans monthly, boosting monthly revenue by 10%.",
+      "Directed 4+ processors, 2+ underwriters, and 3+ closers with coaching and quarterly training, lifting performance by 12%.",
+      "Tracked 5+ KPIs with data analytics and reporting tools to drive an 8% efficiency gain.",
     ],
   },
 ];
+
 
 function Index() {
   return (
