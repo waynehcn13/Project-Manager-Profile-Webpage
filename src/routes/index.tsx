@@ -86,6 +86,23 @@ const projects = [
 
 const awards = [
   {
+    title: "Employee of the Year",
+    organization: "First American Mortgage Solutions — First American Title",
+    year: "Mar 2011",
+    description:
+      "Recognized for dedication to exceptional customer service, strong work ethic, attention to detail, and consistently going above and beyond for clients and colleagues. This award reflects the high standards of excellence and core values of First American Title, the nation's leading title insurance provider.",
+  },
+  {
+    title: "Award of Excellence",
+    organization: "First American Mortgage Solutions — First American Title",
+    year: "Sep 2016",
+  },
+  {
+    title: "Award of Excellence",
+    organization: "First American Mortgage Solutions — First American Title",
+    year: "Sep 2013",
+  },
+  {
     title: "Lean Six Sigma Black Belt (LSSBB)",
     organization: "Aveta Business Institute (SSO-CSSC)",
     year: "2025",
@@ -312,14 +329,21 @@ function Index() {
           <ul className="mt-8 space-y-4">
             {awards.map((award) => (
               <li
-                key={award.title}
-                className="flex flex-col justify-between gap-1 rounded-lg border border-border bg-muted/30 px-5 py-4 sm:flex-row sm:items-center"
+                key={`${award.title}-${award.year}`}
+                className="rounded-lg border border-border bg-muted/30 px-5 py-4"
               >
-                <div>
-                  <p className="font-medium text-foreground">{award.title}</p>
-                  <p className="text-sm text-muted-foreground">{award.organization}</p>
+                <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-start">
+                  <div>
+                    <p className="font-medium text-foreground">{award.title}</p>
+                    <p className="text-sm text-muted-foreground">{award.organization}</p>
+                  </div>
+                  <span className="shrink-0 text-sm font-medium text-muted-foreground">{award.year}</span>
                 </div>
-                <span className="text-sm font-medium text-muted-foreground">{award.year}</span>
+                {award.description && (
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {award.description}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
