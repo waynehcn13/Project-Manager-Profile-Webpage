@@ -226,26 +226,31 @@ function Index() {
       <main className="mx-auto max-w-5xl px-6">
         {/* Hero */}
         <section id="about" className="py-24 sm:py-32">
-          <p className="text-sm font-medium text-muted-foreground">Project Manager</p>
+          <p className="text-sm font-medium text-muted-foreground">
+            Program & Project Manager · PMP, CSM, LSSBB
+          </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-6xl">
             Wayne Nguyen
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            I am a results-driven Project Manager with 8+ years of experience delivering
-            complex, cross-functional initiatives across product, engineering, and operations.
-            I specialize in turning ambiguity into structured plans, aligning diverse
-            stakeholders, and shipping work that matters on time and on budget.
+            Results-driven Program and Project Manager with 12+ years leading high-performing
+            teams across financial services, title insurance, technology, and logistics.
+            Certified PMP, CSM, and LSSBB with deep expertise in Agile, Waterfall, and Lean Six
+            Sigma. Focused on AI adoption and data analytics to streamline workflows, sharpen
+            decision-making, and optimize processes. Currently pursuing an MBA in Data Analytics
+            at Louisiana State University Shreveport, combining business strategy with analytical
+            rigor to lead enterprise-level change. Based in Garden Grove, California.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
-              href="mailto:wayne.nguyen@example.com"
+              href={`mailto:${EMAIL}`}
               className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
               <Mail className="h-4 w-4" />
               Get in touch
             </a>
             <a
-              href="https://linkedin.com/in/wayne-nguyen"
+              href={LINKEDIN}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
@@ -262,7 +267,7 @@ function Index() {
             <Wrench className="h-5 w-5 text-muted-foreground" />
             <h2 className="text-2xl font-semibold tracking-tight">Skills</h2>
           </div>
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {skills.map((skill) => (
               <div
                 key={skill}
@@ -300,7 +305,9 @@ function Index() {
         <section id="awards" className="border-t border-border py-16 sm:py-24">
           <div className="flex items-center gap-3">
             <Award className="h-5 w-5 text-muted-foreground" />
-            <h2 className="text-2xl font-semibold tracking-tight">Awards & Achievements</h2>
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Awards, Certifications & Education
+            </h2>
           </div>
           <ul className="mt-8 space-y-4">
             {awards.map((award) => (
@@ -354,14 +361,14 @@ function Index() {
           </p>
           <div className="flex items-center gap-6">
             <a
-              href="mailto:wayne.nguyen@example.com"
+              href={`mailto:${EMAIL}`}
               className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               <Mail className="h-4 w-4" />
-              wayne.nguyen@example.com
+              {EMAIL}
             </a>
             <a
-              href="https://linkedin.com/in/wayne-nguyen"
+              href={LINKEDIN}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
