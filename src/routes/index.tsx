@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Mail, Linkedin, Briefcase, Award, FolderKanban, Wrench } from "lucide-react";
+import { Mail, Linkedin, Briefcase, Award, FolderKanban, Wrench, Presentation } from "lucide-react";
+import PresentationDeck from "@/components/PresentationDeck";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
