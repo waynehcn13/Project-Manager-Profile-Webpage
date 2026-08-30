@@ -316,6 +316,23 @@ function Index() {
           </div>
         </section>
 
+        {/* Project Presentation */}
+        <section id="presentation" className="border-t border-border py-16 sm:py-24">
+          <div className="flex items-center gap-3">
+            <Presentation className="h-5 w-5 text-muted-foreground" />
+            <h2 className="text-2xl font-semibold tracking-tight">Project Presentation</h2>
+          </div>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            An interactive walkthrough of the DTO Texas Policy Rollout — 249 counties, two
+            phases, twelve months. Use the arrows, keyboard, or slide numbers to navigate.
+          </p>
+          <div className="mt-8">
+            <PresentationDeck />
+          </div>
+        </section>
+
+
+
         {/* Awards */}
         <section id="awards" className="border-t border-border py-16 sm:py-24">
           <div className="flex items-center gap-3">
