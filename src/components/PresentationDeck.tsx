@@ -259,7 +259,7 @@ export default function PresentationDeck() {
     return () => window.removeEventListener("keydown", onKey);
   }, [next, prev]);
 
-  const slide = slides[index];
+  const slide = slides[index]!;
 
   const controls = (
     <div className="flex items-center gap-2">
