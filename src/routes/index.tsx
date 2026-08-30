@@ -24,9 +24,11 @@ const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Presentation", href: "#presentation" },
   { label: "Awards", href: "#awards" },
   { label: "Experience", href: "#experience" },
 ];
+
 
 const skills = [
   "Project Management",
