@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Mail, Linkedin, Briefcase, Award, FolderKanban, Wrench } from "lucide-react";
+import { Mail, Linkedin, Briefcase, Award, FolderKanban, Wrench, Presentation } from "lucide-react";
+import PresentationDeck from "@/components/PresentationDeck";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,9 +24,11 @@ const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Presentation", href: "#presentation" },
   { label: "Awards", href: "#awards" },
   { label: "Experience", href: "#experience" },
 ];
+
 
 const skills = [
   "Project Management",
@@ -228,14 +232,30 @@ function Index() {
             Wayne Nguyen
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Results-driven Program and Project Manager with 12+ years leading high-performing
-            teams across financial services, title insurance, technology, and logistics.
-            Certified PMP, CSM, and LSSBB with deep expertise in Agile, Waterfall, and Lean Six
-            Sigma. Focused on AI adoption and data analytics to streamline workflows, sharpen
-            decision-making, and optimize processes. Currently pursuing an MBA in Data Analytics
-            at Louisiana State University Shreveport, combining business strategy with analytical
-            rigor to lead enterprise-level change. Based in Garden Grove, California.
+            12+ years leading enterprise projects at First American Mortgage Solutions —
+            100+ initiatives spanning legacy system migrations, workflow automation, and
+            multi-state title insurance rollouts. PMP, CSM, and Lean Six Sigma Black Belt.
           </p>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            In late 2023 I made a strategic pivot: a supervisory role at UPS while completing
+            my degree at UC Irvine, adding hands-on operational accountability to project
+            leadership. Now pursuing an MBA in Data Analytics at LSU Shreveport and focused on
+            AI adoption and data-driven delivery. Based in Garden Grove, California.
+          </p>
+          <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {[
+              { k: "12+", v: "Years in PM" },
+              { k: "100+", v: "Projects delivered" },
+              { k: "$5M+", v: "Revenue generated" },
+              { k: "249", v: "TX counties rolled out" },
+            ].map((stat) => (
+              <div key={stat.v} className="rounded-lg border border-border bg-muted/40 px-4 py-3">
+                <dt className="text-2xl font-bold tracking-tight text-foreground">{stat.k}</dt>
+                <dd className="mt-1 text-xs font-medium text-muted-foreground">{stat.v}</dd>
+              </div>
+            ))}
+          </dl>
+
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href={`mailto:${EMAIL}`}
@@ -295,6 +315,23 @@ function Index() {
             ))}
           </div>
         </section>
+
+        {/* Project Presentation */}
+        <section id="presentation" className="border-t border-border py-16 sm:py-24">
+          <div className="flex items-center gap-3">
+            <Presentation className="h-5 w-5 text-muted-foreground" />
+            <h2 className="text-2xl font-semibold tracking-tight">Project Presentation</h2>
+          </div>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            An interactive walkthrough of the DTO Texas Policy Rollout — 249 counties, two
+            phases, twelve months. Use the arrows, keyboard, or slide numbers to navigate.
+          </p>
+          <div className="mt-8">
+            <PresentationDeck />
+          </div>
+        </section>
+
+
 
         {/* Awards */}
         <section id="awards" className="border-t border-border py-16 sm:py-24">
