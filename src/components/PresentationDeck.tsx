@@ -1,358 +1,264 @@
 import { useCallback, useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Download, Maximize2, X } from "lucide-react";
-import deckPdf from "@/assets/dto-deck.pdf.asset.json";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  BarChart3,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Expand,
+  Flag,
+  ShieldCheck,
+  X,
+} from "lucide-react";
+import deckPdf from "@/assets/wayne-project-presentation.pdf.asset.json";
+import roadmapPdf from "@/assets/dto-texas-roadmap.pdf.asset.json";
+import dashboardPdf from "@/assets/dto-texas-dashboard.pdf.asset.json";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type Slide = {
   id: string;
-  kicker: string;
+  label: string;
   title: string;
-  body?: string;
-  groups?: { heading: string; items: string[] }[];
+  subtitle: string;
+  visual: "case" | "lifecycle" | "architecture" | "roadmap" | "dashboard" | "impact";
 };
 
 export const slides: Slide[] = [
   {
-    id: "intro",
-    kicker: "Slide 1",
-    title: "Meet Your Project Manager",
-    body:
-      "12+ years at First American Mortgage Solutions leading 100+ projects, with deep focus on legacy system migrations and workflow automation. PMP, CSM, and Lean Six Sigma Black Belt certified. In late 2023 I stepped into a supervisory role at UPS while completing my Bachelor's at UCI — adding operational discipline to project leadership.",
-  },
-  {
-    id: "cover",
-    kicker: "Slide 2 · Case study",
+    id: "case-study",
+    label: "Case study",
     title: "DTO Texas Policy Rollout",
-    body: "Presented by Wayne Nguyen, PMP, CSM, LSSBB.",
-  },
-  {
-    id: "summary",
-    kicker: "Slide 3 · Project summary",
-    title: "Overview of the DTO Texas Policy Rollout",
-    body:
-      "Recover lost title insurance premiums by establishing direct-issuance capability across all 249 Texas counties, while raising operational efficiency.",
-  },
-  {
-    id: "foundation",
-    kicker: "Slide 4 · Setting the foundation",
-    title: "Goals, Triple Constraints & PM Role",
-    groups: [
-      {
-        heading: "Project goals",
-        items: [
-          "Recover 100% of title premiums across 249 TX counties",
-          "Build Wintrack automation end-to-end",
-          "Premium split model for 220 agency agents",
-          "Self-sustaining ops: revenue up, overhead down, zero compliance violations",
-        ],
-      },
-      {
-        heading: "PM role",
-        items: [
-          "Full resource authority across IT, billing, underwriting, compliance & 3 vendors",
-          "Critical path owner — CPM schedule, 15 milestones",
-          "Change control lead — 9 scope changes, zero scope creep",
-          "Vendor manager — NPS, DataTrace, Allegiance Title",
-        ],
-      },
-      {
-        heading: "Triple constraints",
-        items: [
-          "Scope: 249 counties · 2 phases · 10 deliverables · 9 CCB change requests",
-          "Time: 12 months · Phase I +6 wk approved variance · Phase II on schedule",
-          "Cost: no external budget — revenue justification model, zero added headcount",
-        ],
-      },
-      {
-        heading: "Stakeholder engagement",
-        items: [
-          "3 sponsors engaged at every phase gate",
-          "220 Texas county agents onboarded — zero disengagement",
-          "DTO billing team cross-trained and self-sufficient post-launch",
-          "Weekly allocation reports and monthly finance reports",
-        ],
-      },
-    ],
+    subtitle: "Recovering lost premiums by building direct-issuance capability across all 249 Texas counties.",
+    visual: "case",
   },
   {
     id: "lifecycle",
-    kicker: "Slide 5 · Methodology",
+    label: "Delivery model",
     title: "Hybrid Project Life Cycle",
-    groups: [
-      {
-        heading: "Phase 1 — Initiation (Waterfall)",
-        items: ["Charter & authorization", "Stakeholder ID", "Scope boundary", "Revenue justification"],
-      },
-      {
-        heading: "Phase 2 — Planning",
-        items: ["WBS development", "CPM schedule", "Risk register", "Resource plan", "Vendor SLAs"],
-      },
-      {
-        heading: "Phase 3 — Execution (Agile sprints)",
-        items: [
-          "Sprint 1: Wintrack build & templates",
-          "Sprint 2: billing automation & UAT",
-          "Sprint 3: county config & go-live",
-          "Review → feedback → adapt → next sprint",
-        ],
-      },
-      {
-        heading: "Phase 4 — Deployment & closing (Waterfall)",
-        items: ["Staged rollout", "Phase gate review", "Vendor redistribution", "Formal close"],
-      },
-    ],
+    subtitle: "Waterfall governance with agile execution for automation, compliance, and staged deployment.",
+    visual: "lifecycle",
   },
   {
     id: "architecture",
-    kicker: "Slide 6 · Program architecture",
-    title: "249 Counties · Oct 2023 – Oct 2024",
-    groups: [
-      {
-        heading: "Foundation — Phase I",
-        items: [
-          "D-01 Title templates",
-          "D-03 Wintrack (backbone)",
-          "D-05 Curative process",
-          "D-06 Digital signature",
-          "D-07 MSCC calculator",
-        ],
-      },
-      {
-        heading: "Operational — Phase I & II",
-        items: ["D-02 Automated billing (revenue collection engine)", "D-04 Premium allocation (split calculation engine)"],
-      },
-      {
-        heading: "Outcomes — Phase II+",
-        items: [
-          "D-08 Allocation reports (financial visibility)",
-          "D-09 Educational broadcast (agent adoption)",
-          "D-10 Vendor redistribution (scalability engine)",
-        ],
-      },
-    ],
+    label: "Program architecture",
+    title: "A system designed to sustain itself",
+    subtitle: "Ten connected deliverables moved the operation from foundation to scalable outcomes.",
+    visual: "architecture",
   },
   {
-    id: "schedule",
-    kicker: "Slide 7 · Schedule",
-    title: "Gantt — Two Phases, 15 Milestones",
-    groups: [
-      {
-        heading: "Phase I (Oct 2023 – Mar 2024)",
-        items: [
-          "Initiation · Phase I state selection · financial analysis",
-          "Wintrack workflow & automation · billing integration",
-          "Signature integration · T7/T2 template validation",
-          "County readiness reviews → Go-live 29 CPU counties (03/15/2024)",
-        ],
-      },
-      {
-        heading: "Phase II (Mar – Sep 2024)",
-        items: [
-          "Phase II planning · Wintrack Phase II automation",
-          "Agent contact loading (220 counties) · premium split configuration",
-          "7 high-volume counties go-live (06/15) · 213 remaining (07/01)",
-          "MSCC calculator update · CPU redistribution (NPS/DataTrace) · P24 (Allegiance)",
-        ],
-      },
-      {
-        heading: "Close (Sep – Oct 2024)",
-        items: ["Educational broadcast to agents", "Project completion & formal close"],
-      },
-    ],
+    id: "roadmap",
+    label: "Process artifact",
+    title: "Two phases. Fifteen milestones. One controlled rollout.",
+    subtitle: "A 12-month roadmap coordinated county readiness, automation, agents, and three vendors.",
+    visual: "roadmap",
   },
   {
-    id: "metrics",
-    kicker: "Slide 8 · Outcomes",
-    title: "Key Performance Indicators at Close",
-    body:
-      "Deployment and compliance metrics tracked to project close across all 249 counties — full premium recovery, all milestones delivered, zero compliance violations.",
+    id: "dashboard",
+    label: "Metrics dashboard",
+    title: "The project closed with every risk resolved",
+    subtitle: "High-contrast closeout metrics show deployment, schedule, compliance, and operational readiness.",
+    visual: "dashboard",
   },
   {
     id: "impact",
-    kicker: "Slide 9 · Business impact",
-    title: "Key Business Impact Areas",
-    groups: [
-      { heading: "Revenue", items: ["Recovered lost premiums across all 249 Texas counties"] },
-      { heading: "Operations", items: ["Self-sustaining model with zero IT dependency post-close"] },
-      { heading: "Underwriting", items: ["T7 and T2 templates ensuring compliance — zero violations"] },
-      { heading: "Agent relations", items: ["220 agents onboarded with zero disengagement"] },
-    ],
-  },
-  {
-    id: "lessons",
-    kicker: "Slide 10 · Retrospective",
-    title: "Lessons Learned",
-    groups: [
-      { heading: "What went well", items: ["Staged rollout minimized disruption and smoothed county transitions"] },
-      { heading: "What to improve", items: ["Earlier financial analysis to surface issues and allocate resources pre-go-live"] },
-    ],
-  },
-  {
-    id: "highlights",
-    kicker: "Slide 11 · Special highlights",
-    title: "Complexity Handled",
-    groups: [
-      { heading: "Regulatory", items: ["5 ALTA-restricted counties routed to separate NPS TEN vendor paths, excluded via sponsor-approved change control"] },
-      { heading: "Vendor complexity", items: ["Mid-project NPS → DataTrace redistribution in Aug 2024 with zero disruption"] },
-      { heading: "Tech adoption", items: ["Wintrack built from scratch as the automation backbone for all 249 counties"] },
-      { heading: "Financial discipline", items: ["Revenue justification model increased revenue while decreasing overhead"] },
-    ],
-  },
-  {
-    id: "thanks",
-    kicker: "Slide 12",
-    title: "Thank You & Questions",
-    groups: [
-      {
-        heading: "Contact",
-        items: ["waynehcn@gmail.com", "linkedin.com/in/wayne-nguyen1", "714-933-6503"],
-      },
-    ],
+    label: "Business impact",
+    title: "Operational insight became measurable value",
+    subtitle: "The final model increased revenue, reduced dependency, protected compliance, and earned agent trust.",
+    visual: "impact",
   },
 ];
 
-function SlideBody({ slide }: { slide: Slide }) {
+function CaseStudyVisual() {
+  const columns = [
+    { label: "Problem", color: "border-coral bg-coral/8", icon: ArrowDownRight, items: ["Lost title premiums", "249-county complexity", "Manual billing paths"] },
+    { label: "Action", color: "border-primary bg-primary/8", icon: ArrowRight, items: ["Built Wintrack automation", "Configured premium splits", "Staged two-phase rollout"] },
+    { label: "Result", color: "border-cyan bg-cyan/10", icon: Check, items: ["100% county coverage", "Zero compliance violations", "Self-sustaining operations"] },
+  ];
   return (
-    <div className="flex h-full flex-col">
-      <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-        {slide.kicker}
-      </p>
-      <h3 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">{slide.title}</h3>
-      {slide.body && (
-        <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted-foreground">{slide.body}</p>
-      )}
-      {slide.groups && (
-        <div className="mt-6 grid flex-1 gap-5 sm:grid-cols-2">
-          {slide.groups.map((group) => (
-            <div key={group.heading} className="rounded-lg border border-border bg-muted/30 p-4">
-              <p className="text-sm font-semibold text-foreground">{group.heading}</p>
-              <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-muted-foreground">
-                {group.items.map((item) => (
-                  <li key={item} className="flex gap-2">
-                    <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-foreground/40" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+    <div className="grid gap-3 lg:grid-cols-3">
+      {columns.map(({ label, color, icon: Icon, items }) => (
+        <div key={label} className={cn("rounded-lg border-t-4 bg-card/85 p-5 shadow-sm backdrop-blur-xl", color)}>
+          <div className="flex items-center justify-between">
+            <p className="font-display text-lg font-semibold">{label}</p>
+            <Icon className="h-5 w-5" />
+          </div>
+          <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+            {items.map((item) => <li key={item} className="border-b border-border/70 pb-3 last:border-0">{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function LifecycleVisual() {
+  const phases = [
+    ["01", "Initiate", "Charter · scope · value case"],
+    ["02", "Plan", "WBS · CPM · risks · SLAs"],
+    ["03", "Execute", "3 agile build and UAT sprints"],
+    ["04", "Deploy", "Staged rollout · formal close"],
+  ];
+  return (
+    <div>
+      <div className="grid gap-3 md:grid-cols-4">
+        {phases.map(([number, title, body], index) => (
+          <div key={number} className="relative rounded-lg border border-border bg-card/80 p-5 shadow-sm">
+            <span className={cn("font-display text-3xl font-bold", index === 2 ? "text-coral" : index === 3 ? "text-cyan" : "text-primary")}>{number}</span>
+            <h4 className="mt-4 font-semibold">{title}</h4>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{body}</p>
+            {index < 3 && <ArrowRight className="absolute -right-5 top-1/2 z-10 hidden h-6 w-6 rounded-full bg-background p-1 text-primary md:block" />}
+          </div>
+        ))}
+      </div>
+      <div className="mt-5 rounded-lg border border-primary/20 bg-primary/5 p-4 text-sm text-muted-foreground">
+        <strong className="text-foreground">Why hybrid:</strong> fixed regulatory requirements stayed controlled while automation builds improved through rapid feedback loops.
+      </div>
+    </div>
+  );
+}
+
+function ArchitectureVisual() {
+  const layers = [
+    { title: "Outcomes", color: "bg-cyan/14 border-cyan/30", items: "Allocation reports · Agent education · Vendor redistribution" },
+    { title: "Operations", color: "bg-coral/10 border-coral/30", items: "Automated billing · Premium allocation engine" },
+    { title: "Foundation", color: "bg-primary/8 border-primary/25", items: "Templates · Wintrack backbone · Curative · Digital signature · MSCC" },
+  ];
+  return (
+    <div className="mx-auto flex max-w-3xl flex-col gap-3">
+      {layers.map((layer, i) => (
+        <div key={layer.title} className={cn("rounded-lg border px-6 py-5 shadow-sm", layer.color, i === 0 ? "mx-12" : i === 1 ? "mx-6" : "") }>
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+            <h4 className="font-semibold">{layer.title}</h4>
+            <p className="text-xs text-muted-foreground">{layer.items}</p>
+          </div>
+        </div>
+      ))}
+      <div className="mt-2 flex justify-center"><span className="rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-background">249 counties · one operating model</span></div>
+    </div>
+  );
+}
+
+function RoadmapVisual() {
+  const rows = [
+    { name: "Phase I · 29 CPU counties", start: 0, width: 46, color: "bg-primary" },
+    { name: "Phase II · 220 agency counties", start: 36, width: 48, color: "bg-cyan" },
+    { name: "Vendor redistribution", start: 61, width: 25, color: "bg-coral" },
+    { name: "Formal close", start: 84, width: 16, color: "bg-foreground" },
+  ];
+  return (
+    <div className="overflow-x-auto rounded-lg border border-border bg-card/85 p-5 shadow-sm">
+      <div className="min-w-[640px]">
+        <div className="ml-48 grid grid-cols-7 text-center text-[10px] font-semibold uppercase text-muted-foreground"><span>Oct 23</span><span>Dec</span><span>Feb</span><span>Apr</span><span>Jun</span><span>Aug</span><span>Oct 24</span></div>
+        <div className="mt-4 space-y-4">
+          {rows.map((row) => (
+            <div key={row.name} className="grid grid-cols-[180px_1fr] items-center gap-3">
+              <span className="text-xs font-semibold">{row.name}</span>
+              <div className="relative h-8 rounded bg-muted">
+                <span className={cn("absolute top-1 h-6 rounded shadow-sm", row.color)} style={{ left: `${row.start}%`, width: `${row.width}%` }} />
+              </div>
             </div>
           ))}
         </div>
-      )}
+        <div className="ml-48 mt-5 grid grid-cols-3 gap-3 text-center text-xs font-semibold"><span className="rounded bg-primary/10 p-2 text-primary">Mar 15 · Phase I live</span><span className="rounded bg-cyan/10 p-2 text-foreground">Jul 1 · All counties live</span><span className="rounded bg-coral/10 p-2 text-foreground">Oct · Close</span></div>
+      </div>
     </div>
   );
+}
+
+function DashboardVisual() {
+  const metrics = [["249", "Counties deployed"], ["12 mo", "On schedule"], ["10/10", "Risks closed"], ["0", "Compliance violations"]];
+  return (
+    <div className="grid gap-4 lg:grid-cols-[1.25fr_.75fr]">
+      <div className="grid grid-cols-2 gap-3">
+        {metrics.map(([value, label], i) => <div key={label} className={cn("rounded-lg border p-5 shadow-sm", i === 0 ? "border-primary/30 bg-primary text-primary-foreground" : i === 2 ? "border-cyan/30 bg-cyan/10" : "border-border bg-card/85")}><p className="font-display text-3xl font-bold">{value}</p><p className="mt-2 text-xs font-semibold opacity-75">{label}</p></div>)}
+      </div>
+      <div className="rounded-lg border border-border bg-card/85 p-5 shadow-sm">
+        <div className="flex items-center gap-2"><BarChart3 className="h-4 w-4 text-primary" /><h4 className="font-semibold">Phase progress</h4></div>
+        {["Phase I", "Phase II", "Project close"].map((phase, i) => <div key={phase} className="mt-5"><div className="flex justify-between text-xs"><span>{phase}</span><span className="font-semibold">100%</span></div><div className="mt-2 h-2 overflow-hidden rounded bg-muted"><div className={cn("h-full w-full rounded", i === 1 ? "bg-cyan" : i === 2 ? "bg-coral" : "bg-primary")} /></div></div>)}
+      </div>
+    </div>
+  );
+}
+
+function ImpactVisual() {
+  const impacts = [["Revenue", "Recovered lost premiums across 249 counties"], ["Operations", "Zero IT dependency after close"], ["Compliance", "T7/T2 templates · zero violations"], ["Agent trust", "220 agents · zero disengagement"]];
+  return <div className="grid gap-3 sm:grid-cols-2">{impacts.map(([title, body], i) => <div key={title} className="rounded-lg border border-border bg-card/85 p-5 shadow-sm transition-transform hover:-translate-y-1"><span className={cn("mb-4 block h-1.5 w-12 rounded", i === 0 ? "bg-primary" : i === 1 ? "bg-cyan" : i === 2 ? "bg-coral" : "bg-foreground")} /><h4 className="font-semibold">{title}</h4><p className="mt-2 text-sm text-muted-foreground">{body}</p></div>)}</div>;
+}
+
+function SlideVisual({ visual }: { visual: Slide["visual"] }) {
+  if (visual === "case") return <CaseStudyVisual />;
+  if (visual === "lifecycle") return <LifecycleVisual />;
+  if (visual === "architecture") return <ArchitectureVisual />;
+  if (visual === "roadmap") return <RoadmapVisual />;
+  if (visual === "dashboard") return <DashboardVisual />;
+  return <ImpactVisual />;
 }
 
 export default function PresentationDeck() {
   const [index, setIndex] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
-
-  const next = useCallback(() => setIndex((i) => Math.min(i + 1, slides.length - 1)), []);
-  const prev = useCallback(() => setIndex((i) => Math.max(i - 1, 0)), []);
+  const next = useCallback(() => setIndex((value) => Math.min(value + 1, slides.length - 1)), []);
+  const prev = useCallback(() => setIndex((value) => Math.max(value - 1, 0)), []);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") next();
-      else if (e.key === "ArrowLeft") prev();
-      else if (e.key === "Escape") setFullscreen(false);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") next();
+      if (event.key === "ArrowLeft") prev();
+      if (event.key === "Escape") setFullscreen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [next, prev]);
 
-  const slide = slides[index]!;
+  const slide = slides[index] ?? slides[0];
+  if (!slide) return null;
 
-  const controls = (
-    <div className="flex items-center gap-2">
-      <button
-        type="button"
-        onClick={prev}
-        disabled={index === 0}
-        aria-label="Previous slide"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border transition-colors hover:bg-muted disabled:opacity-40"
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </button>
-      <span className="min-w-16 text-center text-sm font-medium tabular-nums text-muted-foreground">
-        {index + 1} / {slides.length}
-      </span>
-      <button
-        type="button"
-        onClick={next}
-        disabled={index === slides.length - 1}
-        aria-label="Next slide"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border transition-colors hover:bg-muted disabled:opacity-40"
-      >
-        <ChevronRight className="h-4 w-4" />
-      </button>
+  const deck = (
+    <div className="overflow-hidden rounded-lg border border-border/80 bg-card/75 shadow-[0_24px_70px_-36px_var(--primary)] backdrop-blur-xl">
+      <div className="grid lg:grid-cols-[220px_1fr]">
+        <aside className="border-b border-border bg-foreground p-5 text-background lg:border-b-0 lg:border-r">
+          <p className="text-xs font-semibold uppercase text-background/60">DTO Texas</p>
+          <nav className="mt-5 grid grid-cols-3 gap-2 lg:grid-cols-1" aria-label="Presentation slides">
+            {slides.map((item, itemIndex) => (
+              <Button key={item.id} variant="ghost" onClick={() => setIndex(itemIndex)} className={cn("h-auto min-h-11 justify-start whitespace-normal px-3 py-2 text-left text-xs text-background/65 hover:bg-background/10 hover:text-background", itemIndex === index && "bg-background/12 text-background")}>
+                <span className={cn("mr-1 h-2 w-2 shrink-0 rounded-full", itemIndex === index ? "bg-cyan" : "bg-background/25")} />
+                {item.label}
+              </Button>
+            ))}
+          </nav>
+        </aside>
+        <div className="min-w-0 p-5 sm:p-8">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="max-w-2xl">
+              <p className="text-xs font-bold uppercase text-primary">{slide.label} · {index + 1}/{slides.length}</p>
+              <h3 className="mt-2 text-2xl font-semibold sm:text-3xl">{slide.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{slide.subtitle}</p>
+            </div>
+            <Button variant="glass" size="icon" onClick={() => setFullscreen(true)} aria-label="Open full-screen presentation"><Expand /></Button>
+          </div>
+          <div className="mt-7"><SlideVisual visual={slide.visual} /></div>
+          <div className="mt-7 flex items-center justify-between border-t border-border pt-4">
+            <Button variant="glass" size="icon" onClick={prev} disabled={index === 0} aria-label="Previous slide"><ChevronLeft /></Button>
+            <div className="flex gap-1.5">{slides.map((item, itemIndex) => <button key={item.id} type="button" aria-label={`Go to slide ${itemIndex + 1}`} onClick={() => setIndex(itemIndex)} className={cn("h-1.5 rounded-full transition-all", itemIndex === index ? "w-8 bg-primary" : "w-3 bg-border")} />)}</div>
+            <Button variant="vivid" size="icon" onClick={next} disabled={index === slides.length - 1} aria-label="Next slide"><ChevronRight /></Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 
   return (
     <div>
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        {controls}
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setFullscreen(true)}
-            className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-muted"
-          >
-            <Maximize2 className="h-4 w-4" />
-            Present
-          </button>
-          <a
-            href={deckPdf.url}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-medium transition-colors hover:bg-muted"
-          >
-            <Download className="h-4 w-4" />
-            PDF
-          </a>
-        </div>
+      {deck}
+      <div className="mt-4 flex flex-wrap gap-3">
+        <Button asChild variant="glass"><a href={deckPdf.url} target="_blank" rel="noreferrer"><Download />Full presentation</a></Button>
+        <Button asChild variant="glass"><a href={roadmapPdf.url} target="_blank" rel="noreferrer"><Flag />Roadmap PDF</a></Button>
+        <Button asChild variant="glass"><a href={dashboardPdf.url} target="_blank" rel="noreferrer"><ShieldCheck />Dashboard PDF</a></Button>
       </div>
-
-      <div className="mt-5 min-h-[26rem] rounded-xl border border-border bg-card p-6 shadow-sm sm:p-8">
-        <SlideBody slide={slide} />
-      </div>
-
-      <div className="mt-5 flex flex-wrap gap-2">
-        {slides.map((s, i) => (
-          <button
-            key={s.id}
-            type="button"
-            onClick={() => setIndex(i)}
-            aria-current={i === index}
-            className={cn(
-              "rounded-md border px-3 py-1.5 text-xs font-medium transition-colors",
-              i === index
-                ? "border-foreground bg-foreground text-background"
-                : "border-border text-muted-foreground hover:bg-muted",
-            )}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
-
-      {fullscreen && (
-        <div className="fixed inset-0 z-[100] flex flex-col bg-background p-4 sm:p-8">
-          <div className="flex items-center justify-between">
-            {controls}
-            <button
-              type="button"
-              onClick={() => setFullscreen(false)}
-              aria-label="Exit presentation"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border transition-colors hover:bg-muted"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          </div>
-          <div className="mt-6 flex-1 overflow-auto rounded-xl border border-border bg-card p-6 sm:p-10">
-            <SlideBody slide={slide} />
-          </div>
-        </div>
-      )}
+      {fullscreen && <div className="fixed inset-0 z-[100] overflow-auto bg-background/96 p-4 backdrop-blur-2xl sm:p-8"><div className="mx-auto max-w-7xl"><div className="mb-4 flex justify-end"><Button variant="glass" size="icon" onClick={() => setFullscreen(false)} aria-label="Exit presentation"><X /></Button></div>{deck}</div></div>}
     </div>
   );
 }
