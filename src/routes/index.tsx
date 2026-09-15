@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Mail, Linkedin, Briefcase, Award, FolderKanban, Wrench, Presentation } from "lucide-react";
+import { Mail, Linkedin, Briefcase, Award, FolderKanban, Wrench, Presentation, ArrowUpRight } from "lucide-react";
 import PresentationDeck from "@/components/PresentationDeck";
+import { Button } from "@/components/ui/button";
 
 
 export const Route = createFileRoute("/")({
@@ -203,17 +204,17 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <Link to="/" className="text-lg font-semibold tracking-tight">
+      <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
+          <Link to="/" className="font-display text-lg font-semibold">
             Wayne Nguyen
           </Link>
-          <nav className="hidden gap-6 text-sm font-medium text-muted-foreground sm:flex">
+          <nav className="hidden gap-6 text-xs font-semibold text-muted-foreground lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="transition-colors hover:text-foreground"
+                className="transition-colors hover:text-primary"
               >
                 {link.label}
               </a>
@@ -222,71 +223,51 @@ function Index() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl px-6">
+      <main className="mx-auto max-w-6xl px-5 sm:px-8">
         {/* Hero */}
-        <section id="about" className="py-24 sm:py-32">
-          <p className="text-sm font-medium text-muted-foreground">
-            Program & Project Manager · PMP, CSM, LSSBB
-          </p>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-6xl">
-            Wayne Nguyen
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            12+ years leading enterprise projects at First American Mortgage Solutions —
-            100+ initiatives spanning legacy system migrations, workflow automation, and
-            multi-state title insurance rollouts. PMP, CSM, and Lean Six Sigma Black Belt.
-          </p>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            In late 2023 I made a strategic pivot: a supervisory role at UPS while completing
-            my degree at UC Irvine, adding hands-on operational accountability to project
-            leadership. Now pursuing an MBA in Data Analytics at LSU Shreveport and focused on
-            AI adoption and data-driven delivery. Based in Garden Grove, California.
-          </p>
-          <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {[
-              { k: "12+", v: "Years in PM" },
-              { k: "100+", v: "Projects delivered" },
-              { k: "$5M+", v: "Revenue generated" },
-              { k: "249", v: "TX counties rolled out" },
-            ].map((stat) => (
-              <div key={stat.v} className="rounded-lg border border-border bg-muted/40 px-4 py-3">
-                <dt className="text-2xl font-bold tracking-tight text-foreground">{stat.k}</dt>
-                <dd className="mt-1 text-xs font-medium text-muted-foreground">{stat.v}</dd>
+        <section id="about" className="relative py-20 sm:py-28">
+          <div aria-hidden className="absolute left-0 top-8 h-1 w-20 rounded bg-coral" />
+          <div className="grid items-start gap-10 lg:grid-cols-[1.15fr_.85fr] lg:gap-16">
+            <div>
+              <p className="text-sm font-bold uppercase text-primary">Project Management · Operations · Client Relations</p>
+              <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight sm:text-6xl">
+                I turn operational insight into <span className="text-primary">measurable business outcomes.</span>
+              </h1>
+              <p className="mt-7 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+                I spent 15 years inside title insurance and financial services building operational expertise that many companies are only now prioritizing. Today, I actively leverage AI tools and emerging technologies to lead data-driven transformation across financial services, mortgage operations, technology, and logistics.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild variant="vivid" size="lg"><a href={`mailto:${EMAIL}`}><Mail />Start a conversation</a></Button>
+                <Button asChild variant="glass" size="lg"><a href={LINKEDIN} target="_blank" rel="noreferrer"><Linkedin />LinkedIn</a></Button>
               </div>
-            ))}
-          </dl>
-
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href={`mailto:${EMAIL}`}
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              <Mail className="h-4 w-4" />
-              Get in touch
-            </a>
-            <a
-              href={LINKEDIN}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
-            >
-              <Linkedin className="h-4 w-4" />
-              LinkedIn
-            </a>
+            </div>
+            <aside className="rounded-lg border border-border/80 bg-card/70 p-6 shadow-[0_24px_70px_-42px_var(--primary)] backdrop-blur-xl sm:p-7">
+              <p className="text-xs font-bold uppercase text-coral">Executive profile</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Across 20 years of progressive experience and 8+ years leading projects, I have generated $5M+ in revenue, delivered 100+ projects on time and within budget, improved efficiency by 20%, and reduced operational costs by 30%.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                At First American Mortgage Solutions, I managed 800+ title policies monthly across $800K–$1M budgets, led a 50-state title insurance initiative, and spearheaded 10+ API and EDI integrations.
+              </p>
+              <div className="my-5 h-px bg-gradient-to-r from-primary via-cyan to-coral" />
+              <p className="text-sm font-semibold">PMP · LSSBB · CSM · RAID Log Practitioner</p>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Agile, Waterfall, and Lean Six Sigma expertise · 500+ project meetings · 50+ stakeholders per initiative · 95%+ client satisfaction.</p>
+              <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Currently pursuing an MBA in Data Analytics at Louisiana State University Shreveport.</p>
+            </aside>
           </div>
         </section>
 
         {/* Skills */}
-        <section id="skills" className="border-t border-border py-16 sm:py-24">
+        <section id="skills" className="border-t border-primary/15 py-16 sm:py-24">
           <div className="flex items-center gap-3">
-            <Wrench className="h-5 w-5 text-muted-foreground" />
-            <h2 className="text-2xl font-semibold tracking-tight">Skills</h2>
+            <Wrench className="h-5 w-5 text-primary" />
+            <h2 className="text-2xl font-semibold">Core Expertise</h2>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {skills.map((skill) => (
               <div
                 key={skill}
-                className="rounded-lg border border-border bg-muted/50 px-4 py-3 text-sm font-medium text-foreground"
+                className="rounded-lg border border-border/80 bg-card/65 px-4 py-3 text-sm font-semibold shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:text-primary"
               >
                 {skill}
               </div>
@@ -295,36 +276,36 @@ function Index() {
         </section>
 
         {/* Projects */}
-        <section id="projects" className="border-t border-border py-16 sm:py-24">
+        <section id="projects" className="border-t border-primary/15 py-16 sm:py-24">
           <div className="flex items-center gap-3">
-            <FolderKanban className="h-5 w-5 text-muted-foreground" />
-            <h2 className="text-2xl font-semibold tracking-tight">Projects</h2>
+            <FolderKanban className="h-5 w-5 text-coral" />
+            <h2 className="text-2xl font-semibold">Selected Projects</h2>
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
               <article
                 key={project.title}
-                className="flex flex-col rounded-xl border border-border bg-card p-6 shadow-sm"
+                className="group flex flex-col rounded-lg border border-border/80 bg-card/70 p-6 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_22px_45px_-32px_var(--primary)]"
               >
-                <h3 className="text-lg font-semibold">{project.title}</h3>
+                <div className="flex items-start justify-between gap-3"><h3 className="text-lg font-semibold">{project.title}</h3><ArrowUpRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></div>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {project.description}
                 </p>
-                <p className="mt-4 text-sm font-medium text-foreground">{project.outcome}</p>
+                <p className="mt-5 border-t border-border pt-4 text-sm font-semibold text-primary">{project.outcome}</p>
               </article>
             ))}
           </div>
         </section>
 
         {/* Project Presentation */}
-        <section id="presentation" className="border-t border-border py-16 sm:py-24">
+        <section id="presentation" className="border-t border-primary/15 py-16 sm:py-24">
           <div className="flex items-center gap-3">
-            <Presentation className="h-5 w-5 text-muted-foreground" />
-            <h2 className="text-2xl font-semibold tracking-tight">Project Presentation</h2>
+            <Presentation className="h-5 w-5 text-cyan" />
+            <h2 className="text-2xl font-semibold">Interactive Case Study</h2>
           </div>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
             An interactive walkthrough of the DTO Texas Policy Rollout — 249 counties, two
-            phases, twelve months. Use the arrows, keyboard, or slide numbers to navigate.
+             phases, twelve months. Explore the visual case study, process artifacts, and closeout dashboard.
           </p>
           <div className="mt-8">
             <PresentationDeck />
@@ -334,18 +315,18 @@ function Index() {
 
 
         {/* Awards */}
-        <section id="awards" className="border-t border-border py-16 sm:py-24">
+        <section id="awards" className="border-t border-primary/15 py-16 sm:py-24">
           <div className="flex items-center gap-3">
-            <Award className="h-5 w-5 text-muted-foreground" />
-            <h2 className="text-2xl font-semibold tracking-tight">
+            <Award className="h-5 w-5 text-coral" />
+            <h2 className="text-2xl font-semibold">
               Awards, Certifications & Education
             </h2>
           </div>
-          <ul className="mt-8 space-y-4">
+          <ul className="mt-8 grid gap-4 md:grid-cols-2">
             {awards.map((award) => (
               <li
                 key={`${award.title}-${award.year}`}
-                className="rounded-lg border border-border bg-muted/30 px-5 py-4"
+                className="rounded-lg border border-border/80 bg-card/65 px-5 py-4 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-coral/30"
               >
                 <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-start">
                   <div>
@@ -365,16 +346,16 @@ function Index() {
         </section>
 
         {/* Experience */}
-        <section id="experience" className="border-t border-border py-16 sm:py-24">
+        <section id="experience" className="border-t border-primary/15 py-16 sm:py-24">
           <div className="flex items-center gap-3">
-            <Briefcase className="h-5 w-5 text-muted-foreground" />
-            <h2 className="text-2xl font-semibold tracking-tight">Work Experience</h2>
+            <Briefcase className="h-5 w-5 text-primary" />
+            <h2 className="text-2xl font-semibold">Work Experience</h2>
           </div>
           <div className="mt-8 space-y-8">
             {experiences.map((job) => (
-              <div key={job.role} className="relative pl-6 sm:pl-8">
-                <span className="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-foreground/40" />
-                <div className="border-l border-border pl-6 sm:pl-8">
+              <div key={job.role} className="relative rounded-lg border border-border/80 bg-card/65 p-6 shadow-sm backdrop-blur-xl sm:p-8">
+                <span className="absolute -left-1 top-8 h-9 w-1.5 rounded bg-gradient-to-b from-primary via-cyan to-coral" />
+                <div>
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                     <h3 className="text-lg font-semibold">{job.role}</h3>
                     <span className="text-sm font-medium text-muted-foreground">{job.period}</span>
@@ -393,15 +374,15 @@ function Index() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-muted/30">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-          <p className="text-sm text-muted-foreground">
+      <footer className="border-t border-primary/15 bg-foreground text-background">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 sm:flex-row">
+          <p className="text-sm text-background/60">
             © {new Date().getFullYear()} Wayne Nguyen. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <a
               href={`mailto:${EMAIL}`}
-              className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-2 text-sm font-medium text-background/65 transition-colors hover:text-background"
             >
               <Mail className="h-4 w-4" />
               {EMAIL}
@@ -410,7 +391,7 @@ function Index() {
               href={LINKEDIN}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-2 text-sm font-medium text-background/65 transition-colors hover:text-background"
             >
               <Linkedin className="h-4 w-4" />
               LinkedIn
