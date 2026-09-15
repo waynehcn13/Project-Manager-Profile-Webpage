@@ -12,11 +12,12 @@ import {
   ShieldCheck,
   X,
 } from "lucide-react";
-import deckPdf from "@/assets/wayne-project-presentation.pdf.asset.json";
-import roadmapPdf from "@/assets/dto-texas-roadmap.pdf.asset.json";
-import dashboardPdf from "@/assets/dto-texas-dashboard.pdf.asset.json";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+const deckPdfUrl = "/presentation/wayne-project-presentation.pdf";
+const roadmapPdfUrl = "/presentation/dto-texas-roadmap.pdf";
+const dashboardPdfUrl = "/presentation/dto-texas-dashboard.pdf";
 
 type Visual = "case" | "lifecycle" | "architecture" | "roadmap" | "dashboard" | "impact";
 
@@ -193,9 +194,9 @@ const dtoTexas: CaseStudyData = {
     { title: "Agent trust", body: "220 agents · zero disengagement", color: "bg-foreground" },
   ],
   pdfs: [
-    { label: "Full presentation", url: deckPdf.url, icon: Download },
-    { label: "Roadmap PDF", url: roadmapPdf.url, icon: Flag },
-    { label: "Dashboard PDF", url: dashboardPdf.url, icon: ShieldCheck },
+    { label: "Full presentation", url: deckPdfUrl, icon: Download },
+    { label: "Roadmap PDF", url: roadmapPdfUrl, icon: Flag },
+    { label: "Dashboard PDF", url: dashboardPdfUrl, icon: ShieldCheck },
   ],
 };
 
