@@ -1,0 +1,166 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R ] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 1126 >>
+stream
+BT /F1 20 Tf 1 0 0 1 72 740 Tm (Custom Cup Manufacturing Program) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 714 Tm (Delivering 100,000 branded cups for Brew & Co. on a fixed four-month window) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 698 Tm (with vendor Pureco Company.) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 662 Tm (Problem) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 644 Tm (No standing custom-cup supply chain) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 628 Tm (100,000 units in a fixed 4-month window) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 612 Tm (Design iteration risked the production start date) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 576 Tm (Action) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 558 Tm (Ran a phase-gate design and prototyping front end) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 542 Tm (Locked specs at the Prototype Approval gate) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 526 Tm (Shifted to continuous-flow production with Pureco) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 490 Tm (Result) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 472 Tm (100,000 units delivered on schedule) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 456 Tm (All 3 hard gates met on time) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 440 Tm (Full charter-to-close document suite delivered) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 1156 >>
+stream
+BT /F1 20 Tf 1 0 0 1 72 740 Tm (Hybrid Project Life Cycle) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 714 Tm (Phase-gate control for design and prototyping, then continuous-flow) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 698 Tm (discipline once specs were locked for mass production.) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 662 Tm (01 Initiate) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 644 Tm (Charter sign-off - sponsor approval) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 618 Tm (02 Design and Prototype) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 600 Tm (Phase-gated iterations to the prototype gate) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 574 Tm (03 Mass Production) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 556 Tm (Continuous-flow manufacturing - QA sampling) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 530 Tm (04 Delivery and Close) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 512 Tm (Acceptance review - formal close) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 476 Tm (Why hybrid) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 458 Tm (phase-gate control kept design risk contained while specs were still) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 442 Tm (moving, then continuous-flow discipline kept 100,000 units on a fixed) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 426 Tm (delivery date once they were locked.) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 920 >>
+stream
+BT /F1 20 Tf 1 0 0 1 72 740 Tm (A document suite that carried the) Tj ET
+BT /F1 20 Tf 1 0 0 1 72 714 Tm (program end to end) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 688 Tm (Foundation planning artifacts fed operational plans, which fed the milestones) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 672 Tm (and reporting that kept the sponsor informed.) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 636 Tm (Outcomes) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 618 Tm (Delivery acceptance - Sponsor reporting - Vendor coordination with) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 602 Tm (Pureco) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 576 Tm (Operations) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 558 Tm (Schedule, Cost, Communication and Stakeholder Management Plans) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 532 Tm (Foundation) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 514 Tm (Charter - WBS - WBS Dictionary - RACI - Risk Register - RAID Log) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 478 Tm (100,000 units - one hybrid delivery model) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 966 >>
+stream
+BT /F1 20 Tf 1 0 0 1 72 740 Tm (Sixteen milestones. Three hard) Tj ET
+BT /F1 20 Tf 1 0 0 1 72 714 Tm (gates. One production run.) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 688 Tm (A four-month roadmap moved from charter sign-off through prototyping into) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 672 Tm (mass production and delivery acceptance.) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 636 Tm (Timeline \(Apr - Aug\)) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 618 Tm (Design and Prototype gate: Apr - mid May) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 602 Tm (Mass production \(continuous-flow\): mid May - late Jul) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 586 Tm (QA and delivery acceptance: early - mid Aug) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 570 Tm (Formal close: mid - late Aug) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 534 Tm (Milestones) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 516 Tm (Apr 25 - Charter sign-off) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 500 Tm (Jun 1 - Prototype approval) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 484 Tm (Aug 15 - Delivery acceptance) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 839 >>
+stream
+BT /F1 20 Tf 1 0 0 1 72 740 Tm (The program closed on schedule) Tj ET
+BT /F1 20 Tf 1 0 0 1 72 714 Tm (and in scope) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 688 Tm (Closeout metrics show units delivered, schedule adherence, and milestone and) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 672 Tm (gate performance.) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 636 Tm (Key metrics) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 618 Tm (100K - Units delivered) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 602 Tm (4 mo - On schedule) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 586 Tm (16/16 - Milestones closed) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 570 Tm (3/3 - Hard gates met) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 534 Tm (Phase progress) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 516 Tm (Design and Prototype - 100%) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 500 Tm (Mass Production - 100%) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 484 Tm (Delivery and Close - 100%) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 955 >>
+stream
+BT /F1 20 Tf 1 0 0 1 72 740 Tm (Disciplined planning turned a) Tj ET
+BT /F1 20 Tf 1 0 0 1 72 714 Tm (tight timeline into a reliable) Tj ET
+BT /F1 20 Tf 1 0 0 1 72 688 Tm (launch) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 662 Tm (The hybrid model protected the fixed delivery date while giving design room) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 646 Tm (to iterate early.) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 610 Tm (Delivery) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 592 Tm (100,000 branded cups delivered on time for Brew and Co.) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 566 Tm (Schedule) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 548 Tm (Fixed 4-month window held despite early design iteration) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 522 Tm (Vendor partnership) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 504 Tm (Coordinated Pureco across 14 resources and 710 person-hours) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 478 Tm (Governance) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 460 Tm (8 risks tracked in the RAID log - zero surprises at gate reviews) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+xref
+0 17
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000150 00000 n 
+0000000252 00000 n 
+0000000349 00000 n 
+0000001526 00000 n 
+0000001662 00000 n 
+0000002869 00000 n 
+0000003005 00000 n 
+0000003975 00000 n 
+0000004112 00000 n 
+0000005129 00000 n 
+0000005267 00000 n 
+0000006157 00000 n 
+0000006295 00000 n 
+0000007301 00000 n 
+trailer
+<< /Size 17 /Root 1 0 R >>
+startxref
+7439
+%%EOF

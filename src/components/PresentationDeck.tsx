@@ -19,6 +19,10 @@ const deckPdfUrl = "/presentation/wayne-project-presentation.pdf";
 const roadmapPdfUrl = "/presentation/dto-texas-roadmap.pdf";
 const dashboardPdfUrl = "/presentation/dto-texas-dashboard.pdf";
 
+const cupDeckPdfUrl = "/presentation/cup-manufacturing-presentation.pdf";
+const cupRoadmapPdfUrl = "/presentation/cup-manufacturing-roadmap.pdf";
+const cupDashboardPdfUrl = "/presentation/cup-manufacturing-dashboard.pdf";
+
 type Visual = "case" | "lifecycle" | "architecture" | "roadmap" | "dashboard" | "impact";
 
 type Slide = {
@@ -389,7 +393,11 @@ const cupManufacturing: CaseStudyData = {
       color: "bg-foreground",
     },
   ],
-  pdfs: [],
+  pdfs: [
+    { label: "Full presentation", url: cupDeckPdfUrl, icon: Download },
+    { label: "Roadmap PDF", url: cupRoadmapPdfUrl, icon: Flag },
+    { label: "Dashboard PDF", url: cupDashboardPdfUrl, icon: ShieldCheck },
+  ],
 };
 
 const caseStudies: CaseStudyData[] = [dtoTexas, cupManufacturing];

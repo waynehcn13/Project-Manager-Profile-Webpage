@@ -1,0 +1,51 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R ] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 1186 >>
+stream
+BT /F1 20 Tf 1 0 0 1 72 740 Tm (Custom Cup Manufacturing Program) Tj ET
+BT /F1 20 Tf 1 0 0 1 72 714 Tm (- Roadmap) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 688 Tm (A four-month roadmap moved from charter sign-off through prototyping into) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 672 Tm (mass production and delivery acceptance.) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 636 Tm (Phases) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 618 Tm (Design and Prototype gate - Apr, 40% of timeline) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 602 Tm (Mass production \(continuous-flow\) - late May to late Jul, 48% of) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 586 Tm (timeline) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 570 Tm (QA and delivery acceptance - early to mid Aug, 14% of timeline) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 554 Tm (Formal close - mid to late Aug, 8% of timeline) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 518 Tm (Key milestones) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 500 Tm (Apr 25 - Charter sign-off) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 484 Tm (Jun 1 - Prototype approval) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 468 Tm (Aug 15 - Delivery acceptance) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 432 Tm (Result) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 414 Tm (16 of 16 milestones closed - all 3 hard gates met on time) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000116 00000 n 
+0000000218 00000 n 
+0000000315 00000 n 
+0000001552 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1688
+%%EOF

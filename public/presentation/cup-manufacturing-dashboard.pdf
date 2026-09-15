@@ -1,0 +1,50 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R ] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 1049 >>
+stream
+BT /F1 20 Tf 1 0 0 1 72 740 Tm (Custom Cup Manufacturing Program) Tj ET
+BT /F1 20 Tf 1 0 0 1 72 714 Tm (- Closeout Dashboard) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 688 Tm (Closeout metrics show units delivered, schedule adherence, and milestone and) Tj ET
+BT /F2 11 Tf 1 0 0 1 72 672 Tm (gate performance.) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 636 Tm (Headline metrics) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 618 Tm (100K units delivered) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 602 Tm (4 months - delivered on schedule) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 586 Tm (16 of 16 milestones closed) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 570 Tm (3 of 3 hard gates met) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 534 Tm (Phase progress) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 516 Tm (Design and Prototype - 100% complete) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 500 Tm (Mass Production - 100% complete) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 484 Tm (Delivery and Close - 100% complete) Tj ET
+BT /F1 13 Tf 1 0 0 1 72 448 Tm (Governance) Tj ET
+BT /F2 11 Tf 1 0 0 1 90 430 Tm (8 risks tracked in the RAID log - zero surprises at gate reviews) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000116 00000 n 
+0000000218 00000 n 
+0000000315 00000 n 
+0000001415 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1551
+%%EOF
