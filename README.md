@@ -4,7 +4,7 @@ Build a clean, modern personal portfolio webpage for a Project Manager. Include 
 
 This project was built with [Lovable](https://lovable.dev).
 
-**Live app**: https://my-minimal-profile.lovable.app
+**Live app**: https://waynenguyenportfolio.lovable.app
 
 ## Build with Lovable
 
