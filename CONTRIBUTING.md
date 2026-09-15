@@ -7,7 +7,7 @@ This is a personal portfolio site, edited both by hand (this repo) and through t
 1. **Branch from `main`** for any non-trivial change: `git checkout -b <short-description>`.
 2. **Keep commits focused.** One logical change per commit; prefer a few small commits over one large one.
 3. **Write commit messages that explain why, not just what** — e.g. `Fix 404s on presentation PDF download buttons` rather than `update PresentationDeck.tsx`.
-4. **Open a pull request against `main`.** CI (`.github/workflows/ci.yml`) runs lint, type-check, and build on every push and PR — fix any failures before merging.
+4. **Open a pull request against `main`.** CI (`.github/workflows/ci.yml`) runs lint, type-check, and build on every push and PR — fix any type-check or build failures before merging. Lint is currently non-blocking (pre-existing formatting debt, see the workflow file) but please don't add new lint errors in files you touch.
 5. **Merge to `main` deploys automatically to Vercel.** If the change should also go live on Lovable's `waynenguyenportfolio.lovable.app`, publish it manually from the Lovable editor after the merge (see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#deployment-model)).
 
 For small, low-risk fixes (typos, copy tweaks), committing directly to `main` is fine — this isn't a team repo with review gates, just keep CI green.

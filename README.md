@@ -48,7 +48,7 @@ Supabase access lives in `.env` (`VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE
 
 ### Continuous integration
 
-Every push and pull request against `main` runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml), which installs dependencies with Bun and runs lint, type-check, and build. See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution workflow and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the case-study presentation data model works.
+Every push and pull request against `main` runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml), which installs dependencies with Bun and runs lint, type-check, and build. Type-check and build are blocking; lint currently reports but doesn't fail the build, since the repo has pre-existing formatting debt (mostly Prettier quote/semicolon nits in older Lovable-generated files) — see the note in the workflow file. See [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution workflow and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how the case-study presentation data model works.
 
 ### VS Code
 
