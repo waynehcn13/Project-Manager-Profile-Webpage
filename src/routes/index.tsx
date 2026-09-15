@@ -304,8 +304,10 @@ function Index() {
             <h2 className="text-2xl font-semibold">Interactive Case Study</h2>
           </div>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            An interactive walkthrough of the DTO Texas Policy Rollout — 249 counties, two
-             phases, twelve months. Explore the visual case study, process artifacts, and closeout dashboard.
+            Two interactive walkthroughs: the DTO Texas Policy Rollout — 249 counties, two
+             phases, twelve months — and the Custom Cup Manufacturing Program — 100,000 units for
+             Brew & Co. in a four-month hybrid delivery. Switch between them to explore each case
+             study, process artifacts, and closeout dashboard.
           </p>
           <div className="mt-8">
             <PresentationDeck />
