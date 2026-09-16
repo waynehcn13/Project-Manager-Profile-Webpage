@@ -64,3 +64,18 @@ The original DTO Texas PDFs were authored in Lovable and initially referenced vi
 The fix (and the pattern to follow for any new case study): download/generate the actual PDF, commit it under `public/presentation/`, and reference it with a plain absolute path (`/presentation/my-file.pdf`). Vite serves everything in `public/` as-is at the site root, so this works identically on Vercel, Lovable, and local dev — no platform-specific asset pipeline involved.
 
 `.gitattributes` marks `*.pdf` as binary so Git never rewrites line endings inside them (relevant for hand-generated, text-content PDFs — see git history around the Custom Cup Manufacturing PDFs for why that matters: a byte-exact `xref` table in a hand-built PDF will silently corrupt if CRLF conversion touches it).
+
+## Web analytics
+
+Pageviews are tracked with a small self-hosted pipeline instead of a third-party script:
+
+- `src/hooks/use-page-view-tracking.ts` fires on every route change (mounted from `__root.tsx`) and collects only client-observable, non-invasive signals: path, referrer, UTM params, screen size, language/timezone, and a per-tab session id kept in `sessionStorage`. It skips entirely when `navigator.doNotTrack === "1"`.
+- `src/lib/analytics.ts` exports `trackPageView`, a `createServerFn` — its handler body runs server-side only (verified it's absent from the client build output) and is where device/browser/OS get parsed from the `user-agent` header and geo fields get read from Vercel's `x-vercel-ip-*` request headers (present on Vercel, `null` elsewhere, e.g. on Lovable's own hosting).
+- Writes go through `supabaseAdmin` (service-role key) into the `analytics_events` table (`supabase/migrations/20260916120000_create_analytics_events.sql`). That table has RLS enabled with **no policies**, so it's unreachable through the public Supabase API with the anon/publishable key — only the server function can read or write it.
+
+### Stats dashboard
+
+`/stats` (`src/routes/stats.tsx`) renders a small self-serve dashboard — pageview trend chart, top pages/referrers, and device/browser/OS/country breakdowns — over the last 7/30/90 days. It's gated by a shared passphrase, not a route link: the page isn't in the nav, and `head` sets `robots: noindex, nofollow`.
+
+- The passphrase is checked server-side on **every** stats fetch (`src/lib/analytics-stats.ts`, `getAnalyticsStats`) against the `STATS_PASSPHRASE` environment variable — set it in Vercel's project env vars and in Lovable Cloud's env config (and locally in a gitignored `.env.local`, never in the committed `.env`). The page won't work until that variable is set somewhere the server function can read it.
+- On the client, the passphrase is kept in `sessionStorage` only (so it survives a refresh but not a new tab) — it's a lightweight shared-secret gate, not real auth; treat the page as "unlisted + locked," not as protecting sensitive data.

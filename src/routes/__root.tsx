@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { usePageViewTracking } from "../hooks/use-page-view-tracking";
 
 function NotFoundComponent() {
   return (
@@ -128,6 +129,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  usePageViewTracking();
 
   return (
     <QueryClientProvider client={queryClient}>
