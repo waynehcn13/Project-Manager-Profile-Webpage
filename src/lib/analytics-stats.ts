@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 
+import { supabase } from "@/integrations/supabase/client";
+
 export type StatsRangeDays = 7 | 30 | 90;
 
 export type StatBreakdown = { label: string; count: number };
@@ -27,15 +29,6 @@ function validateStatsInput(data: unknown): StatsInput {
   const rangeDays =
     d.rangeDays === 7 || d.rangeDays === 30 || d.rangeDays === 90 ? d.rangeDays : 30;
   return { passphrase: d.passphrase, rangeDays };
-}
-
-// Not truly constant-time (V8 may short-circuit on the XOR chain), but avoids
-// the obvious early-return-on-first-mismatch timing leak of `===`.
-function safeEqual(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let mismatch = 0;
-  for (let i = 0; i < a.length; i++) mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return mismatch === 0;
 }
 
 function topEntries(counts: Map<string, number>, limit = 8): StatBreakdown[] {
@@ -67,34 +60,29 @@ function buildDailySeries(counts: Map<string, number>, rangeDays: number) {
 }
 
 // Reads and aggregates analytics_events for the stats page. Runs server-side
-// only, and requires a passphrase (checked against the STATS_PASSPHRASE env
-// var on every call, not just once) since analytics_events has no RLS
-// policies and is otherwise only reachable via the service-role key.
+// only. The passphrase check happens inside the `get_analytics_events`
+// Postgres function (SECURITY DEFINER, stored in private.app_secrets) rather
+// than against an env var — Lovable Cloud never exposes the service-role key
+// to this app's own deployment, and the anon key alone can't read
+// analytics_events directly (see
+// supabase/migrations/20260917090000_analytics_public_access.sql).
 export const getAnalyticsStats = createServerFn({ method: "POST" })
   .validator(validateStatsInput)
   .handler(async ({ data }): Promise<AnalyticsStats> => {
-    const expected = process.env["STATS_PASSPHRASE"];
-    if (!expected) {
-      throw new Error(
-        "Stats page is not configured: set the STATS_PASSPHRASE environment variable",
-      );
+    const { data: rows, error } = await supabase.rpc("get_analytics_events", {
+      passphrase: data.passphrase,
+      range_days: data.rangeDays,
+    });
+
+    if (error) {
+      if (error.message.includes("Unauthorized")) throw new Error("Unauthorized");
+      if (error.message.includes("not configured")) {
+        throw new Error(
+          "Stats page is not configured: set the stats_passphrase secret in the database",
+        );
+      }
+      throw new Error(`Failed to load analytics: ${error.message}`);
     }
-    if (!safeEqual(data.passphrase, expected)) {
-      throw new Error("Unauthorized");
-    }
-
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-
-    const since = new Date(Date.now() - data.rangeDays * 24 * 60 * 60 * 1000).toISOString();
-
-    const { data: rows, error } = await supabaseAdmin
-      .from("analytics_events")
-      .select("created_at, session_id, path, referrer, device_type, browser, os, country")
-      .gte("created_at", since)
-      .order("created_at", { ascending: false })
-      .limit(20000);
-
-    if (error) throw new Error(`Failed to load analytics: ${error.message}`);
 
     const events = rows ?? [];
 

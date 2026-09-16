@@ -1,6 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getRequestHeader } from "@tanstack/react-start/server";
 
+import { supabase } from "@/integrations/supabase/client";
+
 export type PageViewInput = {
   sessionId: string;
   path: string;
@@ -73,19 +75,20 @@ function parseUserAgent(ua: string | undefined): UserAgentInfo {
 
 // Records a single pageview. Runs server-side only: reads geo/IP-derived
 // headers (Vercel injects x-vercel-ip-*; absent on other hosts, so those
-// fields just stay null there) and writes via the service-role client, since
-// analytics_events has no RLS policies for the anon/publishable key.
+// fields just stay null there) and writes via the public anon client — Lovable
+// Cloud never exposes the service-role key to this app's own deployment, so
+// analytics_events instead has a narrow insert-only RLS policy for anon (see
+// supabase/migrations/20260917090000_analytics_public_access.sql). There's no
+// select/update/delete policy, so a write is all the anon key can ever do here.
 export const trackPageView = createServerFn({ method: "POST" })
   .validator(validatePageViewInput)
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-
     const { deviceType, browser, os } = parseUserAgent(getRequestHeader("user-agent"));
     const country = getRequestHeader("x-vercel-ip-country");
     const region = getRequestHeader("x-vercel-ip-country-region");
     const city = getRequestHeader("x-vercel-ip-city");
 
-    const { error } = await supabaseAdmin.from("analytics_events").insert({
+    const { error } = await supabase.from("analytics_events").insert({
       session_id: data.sessionId,
       path: data.path,
       referrer: data.referrer,

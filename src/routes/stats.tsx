@@ -32,7 +32,7 @@ const RANGE_OPTIONS: StatsRangeDays[] = [7, 30, 90];
 const CARD_CLASS = "border-border/80 bg-card/70 shadow-sm backdrop-blur-xl";
 const AUTH_ERROR_MESSAGES = new Set([
   "Unauthorized",
-  "Stats page is not configured: set the STATS_PASSPHRASE environment variable",
+  "Stats page is not configured: set the stats_passphrase secret in the database",
 ]);
 
 const chartConfig = {
