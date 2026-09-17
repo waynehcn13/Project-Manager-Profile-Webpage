@@ -41,7 +41,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const EMAIL = "waynehcn@gmail.com";
+const EMAIL = "contact@waynehoangnguyen.com";
 const LINKEDIN = "https://linkedin.com/in/wayne-nguyen1";
 
 const navLinks = [
