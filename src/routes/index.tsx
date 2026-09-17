@@ -1,16 +1,39 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Mail, Linkedin, Briefcase, Award, FolderKanban, Wrench, Presentation, ArrowUpRight } from "lucide-react";
+import {
+  Mail,
+  Linkedin,
+  Briefcase,
+  Award,
+  FolderKanban,
+  Wrench,
+  Presentation,
+  Share2,
+  Database,
+  ShieldCheck,
+  Workflow,
+  LineChart,
+  Trophy,
+} from "lucide-react";
 import PresentationDeck from "@/components/PresentationDeck";
 import { Button } from "@/components/ui/button";
-
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Wayne Nguyen | Project Manager Portfolio" },
-      { name: "description", content: "Portfolio of Wayne Nguyen, a results-driven Project Manager delivering complex cross-functional projects on time and on budget." },
+      {
+        name: "description",
+        content:
+          "Portfolio of Wayne Nguyen, a results-driven Project Manager delivering complex cross-functional projects on time and on budget.",
+      },
       { property: "og:title", content: "Wayne Nguyen | Project Manager Portfolio" },
-      { property: "og:description", content: "Portfolio of Wayne Nguyen, a results-driven Project Manager delivering complex cross-functional projects on time and on budget." },
+      {
+        property: "og:description",
+        content:
+          "Portfolio of Wayne Nguyen, a results-driven Project Manager delivering complex cross-functional projects on time and on budget.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -29,7 +52,6 @@ const navLinks = [
   { label: "Awards", href: "#awards" },
   { label: "Experience", href: "#experience" },
 ];
-
 
 const skills = [
   "Project Management",
@@ -56,36 +78,60 @@ const projects = [
     description:
       "Led 10+ inbound and outbound API and EDI connector initiatives as the primary liaison between customers, technical teams, and vendors — from intake through go-live.",
     outcome: "Improved processing efficiency by 1+ business day per initiative.",
+    icon: Share2,
+    accent: "primary" as const,
+    stat: "10+",
+    statLabel: "integrations delivered",
   },
   {
     title: "ERP Legacy Data Migration",
     description:
       "Managed two internal ERP legacy system migration and enhancement initiatives, migrating business reporting, data, and image files while reconstructing system functionality.",
     outcome: "Client satisfaction +10%, system efficiency +15%.",
+    icon: Database,
+    accent: "cyan" as const,
+    stat: "+15%",
+    statLabel: "system efficiency",
   },
   {
     title: "Enterprise Title Insurance Program",
     description:
       "Spearheaded 3 enterprise title insurance initiatives delivering a 50-state solution and expanding underwriting presence nationwide.",
     outcome: "Production cost -15%, closings +20%.",
+    icon: ShieldCheck,
+    accent: "coral" as const,
+    stat: "50",
+    statLabel: "states covered",
   },
   {
     title: "Workflow Automation & Data Mapping",
     description:
       "Initiated 100+ workflow, automation, and data mapping initiatives using flow diagrams, fishbone analysis, Pareto charts, and process mapping.",
     outcome: "Reduced production time by 2 business days.",
+    icon: Workflow,
+    accent: "primary" as const,
+    stat: "100+",
+    statLabel: "initiatives mapped",
   },
   {
     title: "Business Reporting & Analytics",
     description:
       "Led 30+ business system reporting initiatives, leveraging metrics to surface bottlenecks and drive continuous improvement.",
     outcome: "15+ bottlenecks identified, efficiency +15%.",
+    icon: LineChart,
+    accent: "cyan" as const,
+    stat: "30+",
+    statLabel: "reporting initiatives",
   },
   {
     title: "Portfolio Delivery — 100+ Projects",
     description:
       "Launched 100+ projects from initiation to closure with rigorous planning, budget control, and execution discipline.",
     outcome: "$5M additional revenue, costs -30%, production efficiency +20%.",
+    icon: Trophy,
+    accent: "coral" as const,
+    stat: "$5M",
+    statLabel: "additional revenue",
   },
 ];
 
@@ -199,6 +245,134 @@ const experiences = [
   },
 ];
 
+type Project = (typeof projects)[number];
+
+const accentStyles: Record<
+  Project["accent"],
+  { gradient: string; iconBg: string; iconText: string; ring: string }
+> = {
+  primary: {
+    gradient: "from-primary/25 via-primary/5 to-transparent",
+    iconBg: "bg-primary/15",
+    iconText: "text-primary",
+    ring: "ring-primary/30",
+  },
+  cyan: {
+    gradient: "from-cyan/25 via-cyan/5 to-transparent",
+    iconBg: "bg-cyan/15",
+    iconText: "text-cyan",
+    ring: "ring-cyan/30",
+  },
+  coral: {
+    gradient: "from-coral/25 via-coral/5 to-transparent",
+    iconBg: "bg-coral/15",
+    iconText: "text-coral",
+    ring: "ring-coral/30",
+  },
+};
+
+// Webflow-style "click a label, the panel updates" interaction: no real
+// product screenshots exist for this work, so the panel is an original
+// illustrative visual (icon + headline stat) per project rather than a faked
+// screenshot.
+function ProjectShowcase({ items }: { items: Project[] }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [fading, setFading] = useState(false);
+  const active = items[activeIndex] ?? items[0];
+
+  function select(index: number) {
+    if (index === activeIndex) return;
+    setFading(true);
+    window.setTimeout(() => {
+      setActiveIndex(index);
+      setFading(false);
+    }, 150);
+  }
+
+  if (!active) return null;
+  const accent = accentStyles[active.accent];
+  const ActiveIcon = active.icon;
+
+  return (
+    <div className="grid gap-6 lg:grid-cols-[1fr_1.05fr] lg:items-start">
+      <div className="flex flex-col gap-2" role="tablist" aria-label="Selected projects">
+        {items.map((project, index) => {
+          const isActive = index === activeIndex;
+          const itemAccent = accentStyles[project.accent];
+          const ItemIcon = project.icon;
+          return (
+            <button
+              key={project.title}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => select(index)}
+              className={cn(
+                "flex items-start gap-4 rounded-lg border p-4 text-left transition-all",
+                isActive
+                  ? cn("border-transparent bg-card shadow-md ring-1", itemAccent.ring)
+                  : "border-border/70 bg-card/40 hover:border-border hover:bg-card/70",
+              )}
+            >
+              <span
+                className={cn(
+                  "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors",
+                  isActive ? itemAccent.iconBg : "bg-muted",
+                )}
+              >
+                <ItemIcon
+                  className={cn(
+                    "h-5 w-5",
+                    isActive ? itemAccent.iconText : "text-muted-foreground",
+                  )}
+                />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm font-semibold">{project.title}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">
+                  {project.description}
+                </span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div
+        className={cn(
+          "relative flex min-h-[320px] flex-col justify-between overflow-hidden rounded-lg border border-border/80 bg-gradient-to-br p-8 shadow-sm backdrop-blur-xl transition-opacity duration-150",
+          accent.gradient,
+          fading ? "opacity-0" : "opacity-100",
+        )}
+      >
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:18px_18px]"
+        />
+        <div className="relative">
+          <span
+            className={cn(
+              "inline-flex h-14 w-14 items-center justify-center rounded-xl",
+              accent.iconBg,
+            )}
+          >
+            <ActiveIcon className={cn("h-7 w-7", accent.iconText)} />
+          </span>
+          <h3 className="mt-6 text-xl font-semibold">{active.title}</h3>
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+            {active.outcome}
+          </p>
+        </div>
+        <div className="relative mt-8 border-t border-border/60 pt-6">
+          <p className={cn("font-display text-4xl font-bold", accent.iconText)}>{active.stat}</p>
+          <p className="mt-1 text-xs font-semibold uppercase text-muted-foreground">
+            {active.statLabel}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Index() {
   return (
@@ -211,11 +385,7 @@ function Index() {
           </Link>
           <nav className="hidden gap-6 text-xs font-semibold text-muted-foreground lg:flex">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="transition-colors hover:text-primary"
-              >
+              <a key={link.href} href={link.href} className="transition-colors hover:text-primary">
                 {link.label}
               </a>
             ))}
@@ -229,30 +399,56 @@ function Index() {
           <div aria-hidden className="absolute left-0 top-8 h-1 w-20 rounded bg-coral" />
           <div className="grid items-start gap-10 lg:grid-cols-[1.15fr_.85fr] lg:gap-16">
             <div>
-              <p className="text-sm font-bold uppercase text-primary">Project Management · Operations · Client Relations</p>
+              <p className="text-sm font-bold uppercase text-primary">
+                Project Management · Operations · Client Relations
+              </p>
               <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight sm:text-6xl">
-                I turn operational insight into <span className="text-primary">measurable business outcomes.</span>
+                I turn operational insight into{" "}
+                <span className="text-primary">measurable business outcomes.</span>
               </h1>
               <p className="mt-7 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-                I spent 15 years inside title insurance and financial services building operational expertise that many companies are only now prioritizing. Today, I actively leverage AI tools and emerging technologies to lead data-driven transformation across financial services, mortgage operations, technology, and logistics.
+                I spent 15 years inside title insurance and financial services building operational
+                expertise that many companies are only now prioritizing. Today, I actively leverage
+                AI tools and emerging technologies to lead data-driven transformation across
+                financial services, mortgage operations, technology, and logistics.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild variant="vivid" size="lg"><a href={`mailto:${EMAIL}`}><Mail />Start a conversation</a></Button>
-                <Button asChild variant="glass" size="lg"><a href={LINKEDIN} target="_blank" rel="noreferrer"><Linkedin />LinkedIn</a></Button>
+                <Button asChild variant="vivid" size="lg">
+                  <a href={`mailto:${EMAIL}`}>
+                    <Mail />
+                    Start a conversation
+                  </a>
+                </Button>
+                <Button asChild variant="glass" size="lg">
+                  <a href={LINKEDIN} target="_blank" rel="noreferrer">
+                    <Linkedin />
+                    LinkedIn
+                  </a>
+                </Button>
               </div>
             </div>
             <aside className="rounded-lg border border-border/80 bg-card/70 p-6 shadow-[0_24px_70px_-42px_var(--primary)] backdrop-blur-xl sm:p-7">
               <p className="text-xs font-bold uppercase text-coral">Executive profile</p>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Across 20 years of progressive experience and 8+ years leading projects, I have generated $5M+ in revenue, delivered 100+ projects on time and within budget, improved efficiency by 20%, and reduced operational costs by 30%.
+                Across 20 years of progressive experience and 8+ years leading projects, I have
+                generated $5M+ in revenue, delivered 100+ projects on time and within budget,
+                improved efficiency by 20%, and reduced operational costs by 30%.
               </p>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                At First American Mortgage Solutions, I managed 800+ title policies monthly across $800K–$1M budgets, led a 50-state title insurance initiative, and spearheaded 10+ API and EDI integrations.
+                At First American Mortgage Solutions, I managed 800+ title policies monthly across
+                $800K–$1M budgets, led a 50-state title insurance initiative, and spearheaded 10+
+                API and EDI integrations.
               </p>
               <div className="my-5 h-px bg-gradient-to-r from-primary via-cyan to-coral" />
               <p className="text-sm font-semibold">PMP · LSSBB · CSM · RAID Log Practitioner</p>
-              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Agile, Waterfall, and Lean Six Sigma expertise · 500+ project meetings · 50+ stakeholders per initiative · 95%+ client satisfaction.</p>
-              <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Currently pursuing an MBA in Data Analytics at Louisiana State University Shreveport.</p>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                Agile, Waterfall, and Lean Six Sigma expertise · 500+ project meetings · 50+
+                stakeholders per initiative · 95%+ client satisfaction.
+              </p>
+              <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+                Currently pursuing an MBA in Data Analytics at Louisiana State University
+                Shreveport.
+              </p>
             </aside>
           </div>
         </section>
@@ -281,19 +477,11 @@ function Index() {
             <FolderKanban className="h-5 w-5 text-coral" />
             <h2 className="text-2xl font-semibold">Selected Projects</h2>
           </div>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => (
-              <article
-                key={project.title}
-                className="group flex flex-col rounded-lg border border-border/80 bg-card/70 p-6 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_22px_45px_-32px_var(--primary)]"
-              >
-                <div className="flex items-start justify-between gap-3"><h3 className="text-lg font-semibold">{project.title}</h3><ArrowUpRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></div>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {project.description}
-                </p>
-                <p className="mt-5 border-t border-border pt-4 text-sm font-semibold text-primary">{project.outcome}</p>
-              </article>
-            ))}
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Click a project to see its outcome.
+          </p>
+          <div className="mt-8">
+            <ProjectShowcase items={projects} />
           </div>
         </section>
 
@@ -304,25 +492,21 @@ function Index() {
             <h2 className="text-2xl font-semibold">Interactive Case Study</h2>
           </div>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Two interactive walkthroughs: the DTO Texas Policy Rollout — 249 counties, two
-             phases, twelve months — and the Custom Cup Manufacturing Program — 100,000 units for
-             Brew & Co. in a four-month hybrid delivery. Switch between them to explore each case
-             study, process artifacts, and closeout dashboard.
+            Two interactive walkthroughs: the DTO Texas Policy Rollout — 249 counties, two phases,
+            twelve months — and the Custom Cup Manufacturing Program — 100,000 units for Brew & Co.
+            in a four-month hybrid delivery. Switch between them to explore each case study, process
+            artifacts, and closeout dashboard.
           </p>
           <div className="mt-8">
             <PresentationDeck />
           </div>
         </section>
 
-
-
         {/* Awards */}
         <section id="awards" className="border-t border-primary/15 py-16 sm:py-24">
           <div className="flex items-center gap-3">
             <Award className="h-5 w-5 text-coral" />
-            <h2 className="text-2xl font-semibold">
-              Awards, Certifications & Education
-            </h2>
+            <h2 className="text-2xl font-semibold">Awards, Certifications & Education</h2>
           </div>
           <ul className="mt-8 grid gap-4 md:grid-cols-2">
             {awards.map((award) => (
@@ -335,7 +519,9 @@ function Index() {
                     <p className="font-medium text-foreground">{award.title}</p>
                     <p className="text-sm text-muted-foreground">{award.organization}</p>
                   </div>
-                  <span className="shrink-0 text-sm font-medium text-muted-foreground">{award.year}</span>
+                  <span className="shrink-0 text-sm font-medium text-muted-foreground">
+                    {award.year}
+                  </span>
                 </div>
                 {award.description && (
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -355,7 +541,10 @@ function Index() {
           </div>
           <div className="mt-8 space-y-8">
             {experiences.map((job) => (
-              <div key={job.role} className="relative rounded-lg border border-border/80 bg-card/65 p-6 shadow-sm backdrop-blur-xl sm:p-8">
+              <div
+                key={job.role}
+                className="relative rounded-lg border border-border/80 bg-card/65 p-6 shadow-sm backdrop-blur-xl sm:p-8"
+              >
                 <span className="absolute -left-1 top-8 h-9 w-1.5 rounded bg-gradient-to-b from-primary via-cyan to-coral" />
                 <div>
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">

@@ -13,7 +13,19 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
+
+// Shared "comes alive on scroll" entrance: items fade/slide in, staggered by
+// index, once their container enters the viewport, and reset to hidden when
+// it scrolls back out — so the animation replays on every pass.
+const revealClass = "transition-all duration-500 ease-out";
+function revealState(inView: boolean, index: number) {
+  return {
+    className: cn(revealClass, inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"),
+    style: { transitionDelay: inView ? `${index * 70}ms` : "0ms" },
+  };
+}
 
 const deckPdfUrl = "/presentation/wayne-project-presentation.pdf";
 const roadmapPdfUrl = "/presentation/dto-texas-roadmap.pdf";
@@ -402,27 +414,35 @@ const cupManufacturing: CaseStudyData = {
 
 const caseStudies: CaseStudyData[] = [dtoTexas, cupManufacturing];
 
-function CaseStudyVisual({ columns }: { columns: CaseColumn[] }) {
+function CaseStudyVisual({ columns, inView }: { columns: CaseColumn[]; inView: boolean }) {
   return (
     <div className="grid gap-3 lg:grid-cols-3">
-      {columns.map(({ label, color, icon: Icon, items }) => (
-        <div
-          key={label}
-          className={cn("rounded-lg border-t-4 bg-card/85 p-5 shadow-sm backdrop-blur-xl", color)}
-        >
-          <div className="flex items-center justify-between">
-            <p className="font-display text-lg font-semibold">{label}</p>
-            <Icon className="h-5 w-5" />
+      {columns.map(({ label, color, icon: Icon, items }, index) => {
+        const reveal = revealState(inView, index);
+        return (
+          <div
+            key={label}
+            style={reveal.style}
+            className={cn(
+              "rounded-lg border-t-4 bg-card/85 p-5 shadow-sm backdrop-blur-xl",
+              color,
+              reveal.className,
+            )}
+          >
+            <div className="flex items-center justify-between">
+              <p className="font-display text-lg font-semibold">{label}</p>
+              <Icon className="h-5 w-5" />
+            </div>
+            <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+              {items.map((item) => (
+                <li key={item} className="border-b border-border/70 pb-3 last:border-0">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
-            {items.map((item) => (
-              <li key={item} className="border-b border-border/70 pb-3 last:border-0">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -437,29 +457,38 @@ function LifecycleVisual({
   phases,
   whyLabel,
   whyBody,
+  inView,
 }: {
   phases: Phase[];
   whyLabel: string;
   whyBody: string;
+  inView: boolean;
 }) {
   return (
     <div>
       <div className="grid gap-3 md:grid-cols-4">
-        {phases.map((phase, index) => (
-          <div
-            key={phase.number}
-            className="relative rounded-lg border border-border bg-card/80 p-5 shadow-sm"
-          >
-            <span className={cn("font-display text-3xl font-bold", accentText[phase.accent])}>
-              {phase.number}
-            </span>
-            <h4 className="mt-4 font-semibold">{phase.title}</h4>
-            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{phase.body}</p>
-            {index < phases.length - 1 && (
-              <ArrowRight className="absolute -right-5 top-1/2 z-10 hidden h-6 w-6 rounded-full bg-background p-1 text-primary md:block" />
-            )}
-          </div>
-        ))}
+        {phases.map((phase, index) => {
+          const reveal = revealState(inView, index);
+          return (
+            <div
+              key={phase.number}
+              style={reveal.style}
+              className={cn(
+                "relative rounded-lg border border-border bg-card/80 p-5 shadow-sm",
+                reveal.className,
+              )}
+            >
+              <span className={cn("font-display text-3xl font-bold", accentText[phase.accent])}>
+                {phase.number}
+              </span>
+              <h4 className="mt-4 font-semibold">{phase.title}</h4>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{phase.body}</p>
+              {index < phases.length - 1 && (
+                <ArrowRight className="absolute -right-5 top-1/2 z-10 hidden h-6 w-6 rounded-full bg-background p-1 text-primary md:block" />
+              )}
+            </div>
+          );
+        })}
       </div>
       <div className="mt-5 rounded-lg border border-primary/20 bg-primary/5 p-4 text-sm text-muted-foreground">
         <strong className="text-foreground">{whyLabel}</strong> {whyBody}
@@ -474,24 +503,37 @@ const indentClass: Record<NonNullable<Layer["indent"]>, string> = {
   lg: "mx-12",
 };
 
-function ArchitectureVisual({ layers, footerTag }: { layers: Layer[]; footerTag: string }) {
+function ArchitectureVisual({
+  layers,
+  footerTag,
+  inView,
+}: {
+  layers: Layer[];
+  footerTag: string;
+  inView: boolean;
+}) {
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-3">
-      {layers.map((layer) => (
-        <div
-          key={layer.title}
-          className={cn(
-            "rounded-lg border px-6 py-5 shadow-sm",
-            layer.color,
-            indentClass[layer.indent ?? "none"],
-          )}
-        >
-          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-            <h4 className="font-semibold">{layer.title}</h4>
-            <p className="text-xs text-muted-foreground">{layer.items}</p>
+      {layers.map((layer, index) => {
+        const reveal = revealState(inView, index);
+        return (
+          <div
+            key={layer.title}
+            style={reveal.style}
+            className={cn(
+              "rounded-lg border px-6 py-5 shadow-sm",
+              layer.color,
+              indentClass[layer.indent ?? "none"],
+              reveal.className,
+            )}
+          >
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+              <h4 className="font-semibold">{layer.title}</h4>
+              <p className="text-xs text-muted-foreground">{layer.items}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
       <div className="mt-2 flex justify-center">
         <span className="rounded-full bg-foreground px-4 py-2 text-xs font-semibold text-background">
           {footerTag}
@@ -505,10 +547,12 @@ function RoadmapVisual({
   months,
   rows,
   markers,
+  inView,
 }: {
   months: string[];
   rows: RoadmapRow[];
   markers: Marker[];
+  inView: boolean;
 }) {
   return (
     <div className="overflow-x-auto rounded-lg border border-border bg-card/85 p-5 shadow-sm">
@@ -522,13 +566,20 @@ function RoadmapVisual({
           ))}
         </div>
         <div className="mt-4 space-y-4">
-          {rows.map((row) => (
+          {rows.map((row, index) => (
             <div key={row.name} className="grid grid-cols-[180px_1fr] items-center gap-3">
               <span className="text-xs font-semibold">{row.name}</span>
               <div className="relative h-8 rounded bg-muted">
                 <span
-                  className={cn("absolute top-1 h-6 rounded shadow-sm", row.color)}
-                  style={{ left: `${row.start}%`, width: `${row.width}%` }}
+                  className={cn(
+                    "absolute top-1 h-6 rounded shadow-sm transition-all duration-700 ease-out",
+                    row.color,
+                  )}
+                  style={{
+                    left: `${row.start}%`,
+                    width: inView ? `${row.width}%` : 0,
+                    transitionDelay: inView ? `${index * 90}ms` : "0ms",
+                  }}
                 />
               </div>
             </div>
@@ -538,51 +589,77 @@ function RoadmapVisual({
           className="ml-48 mt-5 grid gap-3 text-center text-xs font-semibold"
           style={{ gridTemplateColumns: `repeat(${markers.length}, minmax(0, 1fr))` }}
         >
-          {markers.map((marker) => (
-            <span key={marker.label} className={cn("rounded p-2", marker.color)}>
-              {marker.label}
-            </span>
-          ))}
+          {markers.map((marker, index) => {
+            const reveal = revealState(inView, rows.length + index);
+            return (
+              <span
+                key={marker.label}
+                style={reveal.style}
+                className={cn("rounded p-2", marker.color, reveal.className)}
+              >
+                {marker.label}
+              </span>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
 
-function DashboardVisual({ metrics, phases }: { metrics: Metric[]; phases: PhaseProgress[] }) {
+function DashboardVisual({
+  metrics,
+  phases,
+  inView,
+}: {
+  metrics: Metric[];
+  phases: PhaseProgress[];
+  inView: boolean;
+}) {
   return (
     <div className="grid gap-4 lg:grid-cols-[1.25fr_.75fr]">
       <div className="grid grid-cols-2 gap-3">
-        {metrics.map(([value, label], i) => (
-          <div
-            key={label}
-            className={cn(
-              "rounded-lg border p-5 shadow-sm",
-              i === 0
-                ? "border-primary/30 bg-primary text-primary-foreground"
-                : i === 2
-                  ? "border-cyan/30 bg-cyan/10"
-                  : "border-border bg-card/85",
-            )}
-          >
-            <p className="font-display text-3xl font-bold">{value}</p>
-            <p className="mt-2 text-xs font-semibold opacity-75">{label}</p>
-          </div>
-        ))}
+        {metrics.map(([value, label], i) => {
+          const reveal = revealState(inView, i);
+          return (
+            <div
+              key={label}
+              style={reveal.style}
+              className={cn(
+                "rounded-lg border p-5 shadow-sm",
+                i === 0
+                  ? "border-primary/30 bg-primary text-primary-foreground"
+                  : i === 2
+                    ? "border-cyan/30 bg-cyan/10"
+                    : "border-border bg-card/85",
+                reveal.className,
+              )}
+            >
+              <p className="font-display text-3xl font-bold">{value}</p>
+              <p className="mt-2 text-xs font-semibold opacity-75">{label}</p>
+            </div>
+          );
+        })}
       </div>
       <div className="rounded-lg border border-border bg-card/85 p-5 shadow-sm">
         <div className="flex items-center gap-2">
           <BarChart3 className="h-4 w-4 text-primary" />
           <h4 className="font-semibold">Phase progress</h4>
         </div>
-        {phases.map((phase) => (
+        {phases.map((phase, index) => (
           <div key={phase.label} className="mt-5">
             <div className="flex justify-between text-xs">
               <span>{phase.label}</span>
               <span className="font-semibold">100%</span>
             </div>
             <div className="mt-2 h-2 overflow-hidden rounded bg-muted">
-              <div className={cn("h-full w-full rounded", phase.color)} />
+              <div
+                className={cn("h-full rounded transition-all duration-700 ease-out", phase.color)}
+                style={{
+                  width: inView ? "100%" : "0%",
+                  transitionDelay: inView ? `${metrics.length * 70 + index * 90}ms` : "0ms",
+                }}
+              />
             </div>
           </div>
         ))}
@@ -591,33 +668,50 @@ function DashboardVisual({ metrics, phases }: { metrics: Metric[]; phases: Phase
   );
 }
 
-function ImpactVisual({ impacts }: { impacts: Impact[] }) {
+function ImpactVisual({ impacts, inView }: { impacts: Impact[]; inView: boolean }) {
   return (
     <div className="grid gap-3 sm:grid-cols-2">
-      {impacts.map((impact) => (
-        <div
-          key={impact.title}
-          className="rounded-lg border border-border bg-card/85 p-5 shadow-sm transition-transform hover:-translate-y-1"
-        >
-          <span className={cn("mb-4 block h-1.5 w-12 rounded", impact.color)} />
-          <h4 className="font-semibold">{impact.title}</h4>
-          <p className="mt-2 text-sm text-muted-foreground">{impact.body}</p>
-        </div>
-      ))}
+      {impacts.map((impact, index) => {
+        const reveal = revealState(inView, index);
+        return (
+          <div
+            key={impact.title}
+            style={reveal.style}
+            className={cn(
+              "rounded-lg border border-border bg-card/85 p-5 shadow-sm transition-transform hover:-translate-y-1",
+              reveal.className,
+            )}
+          >
+            <span className={cn("mb-4 block h-1.5 w-12 rounded", impact.color)} />
+            <h4 className="font-semibold">{impact.title}</h4>
+            <p className="mt-2 text-sm text-muted-foreground">{impact.body}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
-function SlideVisual({ visual, study }: { visual: Visual; study: CaseStudyData }) {
-  if (visual === "case") return <CaseStudyVisual columns={study.caseColumns} />;
-  if (visual === "lifecycle") return <LifecycleVisual {...study.lifecycle} />;
-  if (visual === "architecture") return <ArchitectureVisual {...study.architecture} />;
-  if (visual === "roadmap") return <RoadmapVisual {...study.roadmap} />;
-  if (visual === "dashboard") return <DashboardVisual {...study.dashboard} />;
-  return <ImpactVisual impacts={study.impact} />;
+function SlideVisual({
+  visual,
+  study,
+  inView,
+}: {
+  visual: Visual;
+  study: CaseStudyData;
+  inView: boolean;
+}) {
+  if (visual === "case") return <CaseStudyVisual columns={study.caseColumns} inView={inView} />;
+  if (visual === "lifecycle") return <LifecycleVisual {...study.lifecycle} inView={inView} />;
+  if (visual === "architecture")
+    return <ArchitectureVisual {...study.architecture} inView={inView} />;
+  if (visual === "roadmap") return <RoadmapVisual {...study.roadmap} inView={inView} />;
+  if (visual === "dashboard") return <DashboardVisual {...study.dashboard} inView={inView} />;
+  return <ImpactVisual impacts={study.impact} inView={inView} />;
 }
 
 export default function PresentationDeck() {
+  const { ref: visualRef, inView: visualInView } = useInView<HTMLDivElement>(0.35);
   const [studyId, setStudyId] = useState(dtoTexas.id);
   const study = caseStudies.find((item) => item.id === studyId) ?? dtoTexas;
   const [index, setIndex] = useState(0);
@@ -646,7 +740,11 @@ export default function PresentationDeck() {
   const slide = study.slides[index] ?? study.slides[0];
   if (!slide) return null;
 
-  const deck = (
+  // Rendered twice (inline + fullscreen overlay); only the inline copy should
+  // drive the scroll-in-view reveal — fullscreen is already full-focus, so its
+  // visuals just show immediately rather than sharing (and fighting over) the
+  // same IntersectionObserver-backed ref.
+  const renderDeck = (withScrollReveal: boolean) => (
     <div className="overflow-hidden rounded-lg border border-border/80 bg-card/75 shadow-[0_24px_70px_-36px_var(--primary)] backdrop-blur-xl">
       <div className="grid lg:grid-cols-[220px_1fr]">
         <aside className="border-b border-border bg-foreground p-5 text-background lg:border-b-0 lg:border-r">
@@ -694,8 +792,12 @@ export default function PresentationDeck() {
               <Expand />
             </Button>
           </div>
-          <div className="mt-7">
-            <SlideVisual visual={slide.visual} study={study} />
+          <div ref={withScrollReveal ? visualRef : undefined} className="mt-7">
+            <SlideVisual
+              visual={slide.visual}
+              study={study}
+              inView={withScrollReveal ? visualInView : true}
+            />
           </div>
           <div className="mt-7 flex items-center justify-between border-t border-border pt-4">
             <Button
@@ -752,7 +854,7 @@ export default function PresentationDeck() {
           </Button>
         ))}
       </div>
-      {deck}
+      {renderDeck(true)}
       {study.pdfs.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-3">
           {study.pdfs.map(({ label, url, icon: Icon }) => (
@@ -778,7 +880,7 @@ export default function PresentationDeck() {
                 <X />
               </Button>
             </div>
-            {deck}
+            {renderDeck(false)}
           </div>
         </div>
       )}
