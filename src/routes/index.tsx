@@ -14,8 +14,10 @@ import {
   Workflow,
   LineChart,
   Trophy,
+  Bot,
 } from "lucide-react";
 import PresentationDeck from "@/components/PresentationDeck";
+import AIAgentPatterns from "@/components/AIAgentPatterns";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -49,6 +51,7 @@ const navLinks = [
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Presentation", href: "#presentation" },
+  { label: "AI Agents", href: "#ai-agents" },
   { label: "Awards", href: "#awards" },
   { label: "Experience", href: "#experience" },
 ];
@@ -499,6 +502,22 @@ function Index() {
           </p>
           <div className="mt-8">
             <PresentationDeck />
+          </div>
+        </section>
+
+        {/* AI Agent Design Patterns */}
+        <section id="ai-agents" className="border-t border-primary/15 py-16 sm:py-24">
+          <div className="flex items-center gap-3">
+            <Bot className="h-5 w-5 text-primary" />
+            <h2 className="text-2xl font-semibold">AI Agent Design Patterns</h2>
+          </div>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Five agent architectures solving the same task — turning a messy project update into a
+            structured report — live against a real deployed backend. Switch patterns, run your own
+            text or the sample, and watch each one's reasoning trace.
+          </p>
+          <div className="mt-8">
+            <AIAgentPatterns />
           </div>
         </section>
 
