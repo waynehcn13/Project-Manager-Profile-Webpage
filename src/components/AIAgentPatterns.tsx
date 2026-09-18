@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AlertTriangle, Bot, Clock, Loader2, Sparkles } from "lucide-react";
+import { AlertTriangle, ArrowRight, Bot, Clock, Loader2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useInView } from "@/hooks/use-in-view";
@@ -101,6 +101,67 @@ const PATTERNS: Pattern[] = [
     caption: "Proposes an answer, then a separate verification pass gates whether it ships.",
   },
 ];
+
+type HowToStep = { number: string; title: string; body: string };
+
+const HOW_TO_STEPS: HowToStep[] = [
+  { number: "01", title: "Pick a pattern", body: "Switch tabs above to choose an architecture." },
+  {
+    number: "02",
+    title: "Use the sample, or paste your own",
+    body: "The messier the input, the more interesting the comparison.",
+  },
+  {
+    number: "03",
+    title: "Run it and watch",
+    body: "Each reasoning step appears before the final report.",
+  },
+];
+
+function HowToStrip() {
+  return (
+    <div className="mb-4 grid gap-3 md:grid-cols-3">
+      {HOW_TO_STEPS.map((step, index) => (
+        <div
+          key={step.number}
+          className="relative rounded-lg border border-border bg-card/80 p-4 shadow-sm"
+        >
+          <span className="font-display text-2xl font-bold text-primary">{step.number}</span>
+          <h4 className="mt-2 text-sm font-semibold">{step.title}</h4>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{step.body}</p>
+          {index < HOW_TO_STEPS.length - 1 && (
+            <ArrowRight className="absolute -right-5 top-1/2 z-10 hidden h-5 w-5 rounded-full bg-background p-1 text-primary md:block" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+type Nudge = { toId: string; copy: string };
+
+const NEXT_NUDGE: Record<string, Nudge> = {
+  "single-shot": {
+    toId: "react",
+    copy: "This was one pass with no chance to double-check itself. Try ReAct next — it's the only pattern that gets the date math right on the first try.",
+  },
+  "planner-executor": {
+    toId: "react",
+    copy: "This pattern committed to a plan up front. See how ReAct instead adapts step-by-step — and catches the date math the others can miss.",
+  },
+  reflexive: {
+    toId: "react",
+    copy: "This pattern caught mistakes with a second look. Try ReAct to see a pattern built to get it right on the first attempt instead.",
+  },
+  "verifier-gated": {
+    toId: "react",
+    copy: "A separate pass gated this answer before it shipped. Try ReAct to see a different way of building in a self-check.",
+  },
+  react: {
+    toId: "reflexive",
+    copy: "ReAct reasons and acts in a loop with tools. Try Reflexive next to see a pattern that instead drafts, then critiques its own output.",
+  },
+};
 
 const phaseAccent: Record<string, string> = {
   reason: "bg-primary/12 text-primary",
@@ -333,8 +394,18 @@ export default function AIAgentPatterns() {
     }
   }, [pattern.id, pattern.slug, text]);
 
+  const applyNudge = useCallback(
+    (toId: string) => {
+      setTextByPattern((prev) => ({ ...prev, [toId]: text }));
+      setPatternId(toId);
+    },
+    [text],
+  );
+
   return (
     <div>
+      <HowToStrip />
+
       <div
         className="mb-4 flex flex-wrap gap-2"
         role="tablist"
@@ -415,6 +486,19 @@ export default function AIAgentPatterns() {
           <div className="mt-6">
             <TraceView trace={run.result.trace} />
             <ReportView report={run.result.report} />
+            {NEXT_NUDGE[pattern.id] && (
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-primary/20 bg-primary/5 p-4 text-xs leading-relaxed text-muted-foreground">
+                <p>{NEXT_NUDGE[pattern.id]!.copy}</p>
+                <Button
+                  variant="glass"
+                  size="sm"
+                  onClick={() => applyNudge(NEXT_NUDGE[pattern.id]!.toId)}
+                >
+                  Try {PATTERNS.find((item) => item.id === NEXT_NUDGE[pattern.id]!.toId)?.label}
+                  <ArrowRight />
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </div>
